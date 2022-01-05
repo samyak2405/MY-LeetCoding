@@ -25,10 +25,11 @@ class Solution
             }
         }
         v1.push_back(temp);
-        reverse(v1.begin(),v1.end());
         
-        for(int i = 0;i<v1.size();i++)
+        
+        for(int i = v1.size()-1;i>=0;i--)
             res+=v1[i]+".";
+        
         res.pop_back();
         return res;
     } 
