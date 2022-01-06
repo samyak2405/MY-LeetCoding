@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(string s,int &l,int &r,int n,int &max_len,int &st,int &end)
+    void solve(string s,int l,int r,int n,int &max_len,int &st,int &end)
     {
         while(l>=0 and r<n)
             {
@@ -30,9 +30,8 @@ public:
         //Odd length
         for(int i = 0;i<n-1;i++)
         {
-            int l = i,r = i, p = i,q = i+1;
-            solve(s,l,r,n,max_len,st,end);
-            solve(s,p,q,n,max_len,st,end);
+            solve(s,i,i,n,max_len,st,end);
+            solve(s,i,i+1,n,max_len,st,end);
         }
         return s.substr(st,max_len);
     }
