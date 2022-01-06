@@ -1,8 +1,8 @@
 class Solution {
 public:
-    void solve(string s,int l,int r,int n,int &max_len,int &st,int &end)
+    void solve(string s,int l,int r,int &max_len,int &st,int &end)
     {
-        while(l>=0 and r<n)
+        while(l>=0 and r<s.length())
             {
                 if(s[l]==s[r])
                 {
@@ -30,8 +30,8 @@ public:
         //Odd length
         for(int i = 0;i<n-1;i++)
         {
-            solve(s,i,i,n,max_len,st,end);
-            solve(s,i,i+1,n,max_len,st,end);
+            solve(s,i,i,max_len,st,end);
+            solve(s,i,i+1,max_len,st,end);
         }
         return s.substr(st,max_len);
     }
