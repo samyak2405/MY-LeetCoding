@@ -13,13 +13,10 @@ class Solution{
         int maxl[n],maxr[n];
         maxl[0] = arr[0];
         maxr[n-1] = arr[n-1];
-        for(int i = 1;i<n;i++)
+        for(int i = 1,j = n-2;i<n,j>=0;i++,j--)
         {
             maxl[i] = max(arr[i],maxl[i-1]);
-        }
-        for(int i = n-2;i>=0;i--)
-        {
-            maxr[i] = max(arr[i],maxr[i+1]);
+            maxr[j] = max(arr[j],maxr[j+1]);
         }
         int res[n];
         long long sum = 0;
@@ -29,14 +26,6 @@ class Solution{
             res[i] = abs(res[i]-arr[i]);
             sum+=res[i];
         }
-        
-        // for(int i = 0;i<n;i++)
-        // {
-        //     res[i] = abs(res[i]-arr[i]);
-        // }
-        // long long sum = 0;
-        // for(int i = 0;i<n;i++)
-        //     sum += res[i];
         
         return sum;
     }
