@@ -22,9 +22,7 @@ class Solution{
         long long sum = 0;
         for(int i = 0;i<n;i++)
         {
-            res[i] = min(maxl[i],maxr[i]);
-            res[i] = abs(res[i]-arr[i]);
-            sum+=res[i];
+            sum += abs(min(maxl[i],maxr[i]) - arr[i]);
         }
         
         return sum;
