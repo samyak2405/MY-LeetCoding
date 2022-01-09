@@ -22,18 +22,21 @@ class Solution{
             maxr[i] = max(arr[i],maxr[i+1]);
         }
         int res[n];
+        long long sum = 0;
         for(int i = 0;i<n;i++)
         {
             res[i] = min(maxl[i],maxr[i]);
+            res[i] = abs(res[i]-arr[i]);
+            sum+=res[i];
         }
         
-        for(int i = 0;i<n;i++)
-        {
-            res[i] = abs(res[i]-arr[i]);
-        }
-        long long sum = 0;
-        for(int i = 0;i<n;i++)
-            sum += res[i];
+        // for(int i = 0;i<n;i++)
+        // {
+        //     res[i] = abs(res[i]-arr[i]);
+        // }
+        // long long sum = 0;
+        // for(int i = 0;i<n;i++)
+        //     sum += res[i];
         
         return sum;
     }
