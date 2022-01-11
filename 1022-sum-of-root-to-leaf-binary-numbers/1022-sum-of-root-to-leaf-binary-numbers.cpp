@@ -12,37 +12,23 @@
 class Solution {
 public:
     
-    int strtoint(string s)
-    {
-        reverse(s.begin(),s.end());
-        int x =0,j = 0;
-        for(auto it:s)
-        {
-            if(it=='1'){
-                x+=pow(2,j);
-            }
-            j++;
-        }
-        return x;
-    }
-    
-    void solve(TreeNode *root,string s,int &sum)
+    void solve(TreeNode *root,int curr,int &sum)
     {
         if(!root)
             return;
-        s+=to_string(root->val);
+        curr = (curr<<1)|root->val;
         if(!root->left and !root->right)
         {
-            sum += strtoint(s);
-            return ;
+            sum+=curr;
+            return;
         }
-        solve(root->left,s,sum);
-        solve(root->right,s,sum);
+        solve(root->left,curr,sum);
+        solve(root->right,curr,sum);
     }
     
     int sumRootToLeaf(TreeNode* root) {
         int sum = 0;
-        solve(root,"",sum);
+        solve(root,0,sum);
         return sum;
     }
 };
