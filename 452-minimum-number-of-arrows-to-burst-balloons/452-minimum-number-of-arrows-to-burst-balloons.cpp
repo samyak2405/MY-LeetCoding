@@ -18,8 +18,6 @@ public:
             {
                 i = j;
             }
-            // else if(points[i][1]>=points[j][0] and points[i][1]<=points[j][1])
-            //     j++;
             else if(points[i][1]<points[j][0])
             {
                 cnt++;
