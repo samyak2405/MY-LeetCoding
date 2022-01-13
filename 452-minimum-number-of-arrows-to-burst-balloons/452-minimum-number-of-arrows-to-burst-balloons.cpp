@@ -17,16 +17,15 @@ public:
             if(points[i][1]>=points[j][0] and points[i][1]>points[j][1])
             {
                 i = j;
-                j++;
             }
-            else if(points[i][1]>=points[j][0] and points[i][1]<=points[j][1])
-                j++;
+            // else if(points[i][1]>=points[j][0] and points[i][1]<=points[j][1])
+            //     j++;
             else if(points[i][1]<points[j][0])
             {
                 cnt++;
                 i = j;
-                j++;
             }
+            j++;
         }
         return cnt;
     }
