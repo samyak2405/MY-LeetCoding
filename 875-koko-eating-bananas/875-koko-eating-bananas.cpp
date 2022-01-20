@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minEatingSpeed(vector<int>& piles, int h) {
-        int _max = INT_MAX;
+        int _max = 1000000000;
         int k = 1;
         int ans = 0;
         vector<int> v1 = piles;
