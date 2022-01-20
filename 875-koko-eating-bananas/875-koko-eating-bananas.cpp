@@ -11,13 +11,13 @@ public:
             {
                 tot += (it+mid-1)/mid;
             }
-            if(tot>h)
+            if(tot<=h)
             {
-                k = mid+1;
+                _max = mid;
             }
             else
             {
-                _max = mid;
+                k = mid+1;
             }
         }
         return _max;
