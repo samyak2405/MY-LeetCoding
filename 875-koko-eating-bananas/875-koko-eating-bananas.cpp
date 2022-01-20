@@ -11,13 +11,7 @@ public:
             int tot = 0;
             for(auto it:v1)
             {
-                if(mid>it)
-                    tot++;
-                else{
-                    tot+=it/mid;
-                    if(it%mid!=0)
-                        tot++;
-                }
+                tot += (it+mid-1)/mid;
             }
             if(tot<=h)
             {
