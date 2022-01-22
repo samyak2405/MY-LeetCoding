@@ -22,13 +22,8 @@ class Solution
             }
         }
         for(int i = 0;i<26;i++)
-            if(cnt[i]!=0)
-                {
-                    while(cnt[i]--)
-                    {
-                        res+=('A'+i);
-                    }
-                }
+            while(cnt[i]--)
+                res+=('A'+i);
         res+=to_string(sum);
         return res;
     }
