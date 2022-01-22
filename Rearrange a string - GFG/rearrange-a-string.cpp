@@ -12,15 +12,23 @@ class Solution
     {
         string res = "";
         int sum = 0;
+        int cnt[26] = {0};
         for(int i = 0;i<str.length();i++)
         {
             if(str[i]>='0' and str[i]<='9')
                 sum+=str[i]-'0';
             else{
-                res+=str[i];
+                cnt[str[i]-'A']++;
             }
         }
-        sort(res.begin(),res.end());
+        for(int i = 0;i<26;i++)
+            if(cnt[i]!=0)
+                {
+                    while(cnt[i]--)
+                    {
+                        res+=('A'+i);
+                    }
+                }
         res+=to_string(sum);
         return res;
     }
