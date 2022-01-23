@@ -10,7 +10,7 @@ public:
             seive[i] = 1;
         
         for(int i = 2;i*i<n;i++)
-            if(seive[i]==1)
+            if(seive[i])
                 for(int j = i*i;j<n;j+=i)
                     seive[j] = 0;
         
