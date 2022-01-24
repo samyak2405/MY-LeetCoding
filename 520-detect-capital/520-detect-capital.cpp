@@ -11,11 +11,7 @@ public:
         }
         if((word[0]>='a' and word[0]<='z')and(up>=1) )
             return false;
-        if(up>=1 and low==0)
-            return true;
-        if(up==1 and low!=0)
-            return true;
-        if(up==0 and low!=0)
+        if((up>=1 and low==0) or (up==1 and low!=0) or (up==0 and low!=0) )
             return true;
         return false;
     }
