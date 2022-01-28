@@ -10,23 +10,17 @@ class Solution
   public:
     int subArraySum(int arr[], int n, int sum)
     {
-    	int cnt = 0;
-    	map<int,int> mp;
-    	int curr_sum = 0;
-    	for(int i = 0;i<n;i++)
-    	{
-    	    curr_sum+=arr[i];
-    	    if(curr_sum == sum)
-    	    {
-    	        cnt++;
-    	    }
-    	    if(mp.find(curr_sum-sum)!=mp.end())
-    	    {
-    	        cnt+=mp[curr_sum-sum];
-    	    }
-    	    mp[curr_sum]++;
-    	}
-    	return cnt;
+        int cum = 0;
+        int cnt = 0;
+        map<int,int> mp;
+        mp[0]++;
+        for(int i = 0;i<n;i++)
+        {
+            cum+=arr[i];
+            cnt+=mp[cum-sum];
+            mp[cum]++;
+        }
+        return cnt;
     }
 };
 
