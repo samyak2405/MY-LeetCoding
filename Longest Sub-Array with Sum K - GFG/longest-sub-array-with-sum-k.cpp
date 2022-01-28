@@ -9,12 +9,10 @@ class Solution{
     public:
     int lenOfLongSubarr(int arr[],  int n, int sum) 
     { 
-        int start = 0;
-        int end = 0;
         int curr_sum = 0;
         map<int,int> mp;
         int res = 0;
-        
+
         for(int i = 0;i < n;i++)
         {
             curr_sum += arr[i];
