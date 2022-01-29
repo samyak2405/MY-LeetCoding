@@ -12,7 +12,6 @@ class Solution
     string smallestWindow (string s, string p)
     {
         int i = 0,j = 0,x = 0,y = INT_MAX;
-        string res = "";
         unordered_map<char,int> mp;
         
         for(auto it:p)
@@ -63,7 +62,7 @@ class Solution
                 i++;
             }
         }
-        
+        string res;
         if(y==INT_MAX)
             return "-1";
         return res.append(s.substr(x,y));
