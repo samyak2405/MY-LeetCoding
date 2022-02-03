@@ -9,10 +9,9 @@ public:
                 break;
             i--;
         }
-        // cout<<i<<endl;
         if(i==0)
         {
-            sort(nums.begin(),nums.end());
+            reverse(nums.begin()+i,nums.end());
             return ;
         }
         int a = nums[i-1];
@@ -23,9 +22,6 @@ public:
                 break;
         }
         swap(nums[i-1],nums[j-1]);
-        // for(auto it:nums)
-        //     cout<<it<<" ";
-        // cout<<endl;
         j = n-1;
         while(i<j)
         {
