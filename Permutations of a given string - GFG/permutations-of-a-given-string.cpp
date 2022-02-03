@@ -6,14 +6,28 @@ using namespace std;
 class Solution
 {
 	public:
-		vector<string>find_permutation(string S)
+        	
+	    void solve(string s,int index,vector<string> &res)
+	    {
+	        if(index>=s.length())
+	       {
+	           res.push_back(s);
+	           return;
+	       }
+	       for(int i = index;i<s.length();i++)
+	       {
+	           swap(s[i],s[index]);
+	           solve(s,index+1,res);
+	           swap(s[i],s[index]);
+	       }
+	    }
+	
+		vector<string> find_permutation(string S)
 		{
 		    vector<string> res;
 		    sort(S.begin(),S.end());
-		    do{
-		        res.push_back(S);
-		    }while(next_permutation(S.begin(),S.end()));
-		    
+		    solve(S,0,res);
+		    sort(res.begin(),res.end());
 		    return res;
 		}
 };
