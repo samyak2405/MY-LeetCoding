@@ -1,19 +1,21 @@
 class Solution {
 public:
     
-    void combine(vector<int> &nums,int target,vector<vector<int>> &res,int index,vector<int> &tmp)
+    void combine(vector<int> &nums,int target,vector<vector<int>> &res,int index,vector<int> tmp)
     {
-        if(!target)
+        if(target<0)
+            return;
+        if(index==nums.size())
         {
-            res.push_back(tmp);
+            if(!target)
+                res.push_back(tmp);
             return;
         }
-        for(int i = index;i!=nums.size() and target>=nums[i];i++)
-        {
-            tmp.push_back(nums[i]);
-            combine(nums,target-nums[i],res,i,tmp);
-            tmp.pop_back();
-        }
+        tmp.push_back(nums[index]);
+        combine(nums,target-nums[index],res,index,tmp);
+        tmp.pop_back();
+        combine(nums,target,res,index+1,tmp);
+        
     }
     
     vector<vector<int>> combinationSum(vector<int>& nums, int target) {
