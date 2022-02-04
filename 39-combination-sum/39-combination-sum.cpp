@@ -11,9 +11,12 @@ public:
                 res.push_back(tmp);
             return;
         }
-        tmp.push_back(nums[index]);
-        combine(nums,target-nums[index],res,index,tmp);
-        tmp.pop_back();
+        if(nums[index]<=target)
+        {
+            tmp.push_back(nums[index]);
+            combine(nums,target-nums[index],res,index,tmp);
+            tmp.pop_back();
+        }
         combine(nums,target,res,index+1,tmp);
         
     }
