@@ -18,20 +18,18 @@ class Solution{
             mp.insert(arr[i]);
         }
         int res = 1;
-        int cnt = 1;
         for(int i = 0;i<n;i++)
         {
-            if(mp.find(arr[i]-1)!=mp.end())
-                continue;
-            else if(mp.find(arr[i]-1)==mp.end())
+
+            if(mp.find(arr[i]-1)==mp.end())
             {
-                while(mp.find(arr[i]+1)!=mp.end())
+                int cnt = 1;
+                while(mp.find(arr[i]+cnt)!=mp.end())
                 {
-                    arr[i]+=1;
                     cnt++;
                 }
                 res = max(res,cnt);
-                cnt = 1;
+                
             }
         }
         return res;
