@@ -8,36 +8,38 @@ class Solution
 {
     public:
     //Function to find a continuous sub-array which adds up to a given number.
-    vector<int> subarraySum(int arr[], int n, long long s)
+    vector<int> subarraySum(int arr[], int n, long long sum)
     {
+        vector<int> res;
         int i = 0,j = 0;
-        long long sum = 0;
+        long long s = 0;
+        
         while(j<n)
         {
-            sum+=arr[j];
-            if(sum<s)
+            s+=arr[j];
+            if(s<sum)
+            {
                 j++;
-            else if(sum==s)
-            {
-                break;
             }
-            else if(sum>s)
+            else if(s==sum)
+                break;
+            else if(s>sum)
             {
-                while(sum>s)
+                while(s>sum)
                 {
-                    sum-=arr[i];
+                    s-=arr[i];
                     i++;
                 }
-                if(sum==s)
-                {
+                if(s==sum)
                     break;
-                }
                 else
                     j++;
             }
         }
+        
+        
         if(j>=n)
-            return vector<int>{-1};
+            return vector<int>(1,-1);
         return vector<int>{i+1,j+1};
     }
 };
