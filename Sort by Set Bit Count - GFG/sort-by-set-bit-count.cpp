@@ -6,20 +6,18 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
     public:
+    
+    static int cmp(int a,int b)
+    {
+        int m = __builtin_popcount(a);
+        int n = __builtin_popcount(b);
+        
+        return m>n;
+    }
+    
     void sortBySetBitCount(int arr[], int n)
     {
-        map<int,vector<int>> mp;
-        for(int i = 0;i<n;i++)
-        {
-            mp[__builtin_popcount(arr[i])].push_back(arr[i]);
-        }
-        int i = 0;
-        for(auto it = mp.rbegin();it!=mp.rend();it++)
-        {
-            for(auto itr:it->second)
-                arr[i++] = itr;
-        }
-        
+        stable_sort(arr,arr+n,cmp);
     }
 };
 
