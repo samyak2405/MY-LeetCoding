@@ -101,30 +101,30 @@ class Solution
 {
     public:
     //Function to find the vertical order traversal of Binary Tree.
-    
-    void preorder(Node *root,map<int,map<int,vector<int>>> &pq,int h,int lvl)
-    {
-        if(!root)
-            return;
-        pq[h][lvl].push_back(root->data);
-        preorder(root->left,pq,h-1,lvl+1);
-        preorder(root->right,pq,h+1,lvl+1);
-    }
-    
     vector<int> verticalOrder(Node *root)
     {
+        map<int,vector<int>> mp;
+        queue<pair<Node *,int>> q;
+        q.push({root,0});
         vector<int> res;
-        map<int,map<int,vector<int>>> pq;
         
-        preorder(root,pq,0,0);
+        while(!q.empty())
+        {
+            Node *tmp = q.front().first;
+            int dist = q.front().second;
+            q.pop();
+            mp[dist].push_back(tmp->data);
+            
+            if(tmp->left)
+                q.push({tmp->left,dist-1});
+            if(tmp->right)
+                q.push({tmp->right,dist+1});
+        }
         
-        for(auto it:pq)
+        for(auto it:mp)
         {
             for(auto itr:it.second)
-            {
-                for(auto itrr:itr.second)
-                    res.push_back(itrr);
-            }
+                res.push_back(itr);
         }
         
         return res;
