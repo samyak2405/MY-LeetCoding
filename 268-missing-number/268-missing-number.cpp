@@ -4,10 +4,9 @@ public:
         int _xor = 0;
         
         for(int i = 0;i<nums.size();i++)
-            _xor^=nums[i];
+            _xor^=nums[i]^i;
         
-        for(int i = 0;i<=nums.size();i++)
-            _xor^=i;
+        _xor^=nums.size();
         
         return _xor;
     }
