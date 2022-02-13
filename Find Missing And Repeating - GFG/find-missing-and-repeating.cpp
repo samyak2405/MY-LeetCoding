@@ -7,50 +7,21 @@ using namespace std;
 class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
-       int _xor = 0;
-       int *res = new int[2];
-       
-        for(int i = 0;i<n;i++)
-            _xor^=arr[i]^(i+1);
-        
-        int rsb = _xor&-_xor;
-        
-        int x = 0;
-        int y = 0;
+        int *res = new int[2];
         
         for(int i = 0;i<n;i++)
         {
-            if(rsb&arr[i])
-                x^=arr[i];
+            if(arr[abs(arr[i])-1]>0)
+                arr[abs(arr[i])-1] = -arr[abs(arr[i])-1];
             else
-                y^=arr[i];
+                res[0] = abs(arr[i]);
         }
         
-        for(int i = 1;i<=n;i++)
-        {
-            if(rsb&i)
-                x^=i;
-            else
-                y^=i;
-        }
-        bool flag = false;
         for(int i = 0;i<n;i++)
-        {
-            if(x == arr[i])
-            {
-                res[0] = x;
-                flag = true;
-                break;
-            }
-        }
-        if(flag)
-            res[1] = y;
-        else
-        {
-            res[0] = y;
-            res[1] = x;
-        }
-       return res;
+            if(arr[i]>0)
+                res[1] = i+1;
+        
+        return res;
     }
 };
 
