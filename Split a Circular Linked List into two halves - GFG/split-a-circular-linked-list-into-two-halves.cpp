@@ -101,38 +101,32 @@ struct Node
 
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
-    if(!head)
+    if(head==NULL)
+    return;
+    
+    if(head->next==head)
+    {
+        *head1_ref=head;
         return;
-    if(!head->next)
-    {
-        head->next = head;
-        return;
     }
-    int n = 1;
-    Node *p = head->next;
-    while(p!=head)
-    {
-        n++;
-        p = p->next;
-    }
-    Node *q,*r;
-    p = head;
-    if(n%2==0)
-        n/=2;
-    else
-        n = (n+1)/2;
-    while(n--)
-    {
-        q = p;
-        p=p->next;
-    }
-    q->next = head;
-    r = p;
-    while(p->next!=head)
-    {
-        p = p->next;
-    }
-    p->next = r;
-    *head1_ref = head;
-    *head2_ref = r;
+   
+   Node* r=head;
+   Node* s=head->next;
+   Node* m;
+   *head1_ref=head;
+   
+   while(s!=head and s->next!=head)
+   {
+       r=r->next;
+       s=s->next->next;
+   }
+  *head2_ref=r->next; 
+  m=r->next;
+  
+  while(m->next!=head)
+  m=m->next;
+  
+  m->next=r->next;
+  r->next=head;
+  return;
 }
