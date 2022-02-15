@@ -110,23 +110,22 @@ void splitList(Node *head, Node **head1_ref, Node **head2_ref)
         return;
     }
    
-   Node* r=head;
-   Node* s=head->next;
-   Node* m;
-   *head1_ref=head;
+   Node *fast = head;
+   Node *slow = head;
+   *head1_ref = head;
    
-   while(s!=head and s->next!=head)
+   while(fast->next!=head and fast->next->next!=head)
    {
-       r=r->next;
-       s=s->next->next;
+       fast = fast->next->next;
+       slow = slow->next;
    }
-  *head2_ref=r->next; 
-  m=r->next;
-  
-  while(m->next!=head)
-  m=m->next;
-  
-  m->next=r->next;
-  r->next=head;
-  return;
+   fast = slow->next;
+   slow->next = head;
+   Node *temp = fast;
+   while(temp->next!=head)
+    {
+        temp = temp->next;
+    }
+    temp->next = fast;
+    *head2_ref = fast;
 }
