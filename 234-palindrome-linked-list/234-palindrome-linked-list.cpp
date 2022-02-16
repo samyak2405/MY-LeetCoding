@@ -15,14 +15,14 @@ public:
             return true;
         ListNode *p = head;
         ListNode *q = head;
+        ListNode *r;
         while(q and q->next)
         {
+            r = p;
             p = p->next;
             q = q->next->next;
         }
-        q = head;
-        while(q->next!=p)
-            q = q->next;
+        q = r;
         q->next = NULL;
         ListNode *prev = NULL,*forward = NULL,*curr = p;
         while(curr)
@@ -33,11 +33,6 @@ public:
             curr = forward;
         }
         p = prev;
-        while(prev)
-        {
-            cout<<prev->val<<" ";
-            prev = prev->next;
-        }
         q = head;
         while(p and q)
         {
