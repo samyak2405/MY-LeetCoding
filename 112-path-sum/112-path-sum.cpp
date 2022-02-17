@@ -12,27 +12,28 @@
 class Solution {
 public:
     
-    void preorder(TreeNode *root,int sum,int targetSum,bool &flag)
+    bool preorder(TreeNode *root,int sum,int targetSum)
     {
         if(!root)
-            return;
+            return false;
+        
         sum+=root->val;
+        
         if(!root->left and !root->right)
-        {
             if(sum==targetSum)
-            {
-                flag = true;
-                return;
-            }
-        }
-        preorder(root->left,sum,targetSum,flag);
-        preorder(root->right,sum,targetSum,flag);
+                return true;
+        
+        if(preorder(root->left,sum,targetSum))
+            return true;
+        
+        if(preorder(root->right,sum,targetSum))
+            return true;
+        
         sum-=root->val;
+        return false;
     }
     
     bool hasPathSum(TreeNode* root, int targetSum) {
-        bool flag = false;
-        preorder(root,0,targetSum,flag);
-        return flag;
+        return preorder(root,0,targetSum);
     }
 };
