@@ -22,13 +22,10 @@ public:
             s1.push(num[i]);
             i++;
         }
-        if(k)
+        while(!s1.empty() and k)
         {
-            while(!s1.empty() and k)
-            {
-                s1.pop();
-                k--;
-            }
+            s1.pop();
+            k--;
         }
         string res;
         while(!s1.empty())
