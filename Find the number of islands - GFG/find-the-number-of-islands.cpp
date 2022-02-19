@@ -7,15 +7,13 @@ class Solution {
   public:
     // Function to find the number of islands.
     typedef vector<vector<char>> vvi;
-    int dx[8] = {-1,1,0,0,-1,-1,1,1};
-    int dy[8] = {0,0,-1,1,-1,1,-1,1};
-    void dfs(vvi &grid,int i,int j,int n,int m)
+    void dfs(vvi &grid,int i,int j,int n,int m,int *dx,int *dy)
     {
         if(i<0 or i>=n or j<0 or j>=m or grid[i][j]!='1')
             return;
         grid[i][j] = 'x';
         for(int k = 0;k<8;k++)
-            dfs(grid,i+dx[k],j+dy[k],n,m);
+            dfs(grid,i+dx[k],j+dy[k],n,m,dx,dy);
         return;
     }
     
@@ -23,13 +21,15 @@ class Solution {
         int cnt = 0;
         int n = grid.size();
         int m = grid[0].size();
+        int dx[8] = {-1,1,0,0,-1,-1,1,1};
+        int dy[8] = {0,0,-1,1,-1,1,-1,1};
         for(int i = 0;i<n;i++)
         {
             for(int j = 0;j<m;j++)
             {
                 if(grid[i][j]=='1')
                 {
-                    dfs(grid,i,j,n,m);
+                    dfs(grid,i,j,n,m,dx,dy);
                     cnt++;
                 }
             }
