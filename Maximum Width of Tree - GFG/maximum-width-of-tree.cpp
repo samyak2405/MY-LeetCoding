@@ -100,17 +100,15 @@ class Solution {
   public:
     // Function to get the maximum width of a binary tree.
     
-    void solve(Node *root,int lvl,int &sum)
+    int solve(Node *root,int lvl)
     {
         if(!root)
-            return;
+            return 0;
         if(lvl==1)
         {
-            sum++;
-            return;
+            return 1;
         }
-        solve(root->left,lvl-1,sum);
-        solve(root->right,lvl-1,sum);
+        return solve(root->left,lvl-1) + solve(root->right,lvl-1);
     }
     
     int height(Node *root)
@@ -122,11 +120,7 @@ class Solution {
         int h = height(root);
         int cnt = 0;
         for(int i = 1;i<=h;i++)
-        {
-            int sum = 0;
-            solve(root,i,sum);
-            cnt = max(cnt,sum);
-        }
+            cnt = max(cnt,solve(root,i));
         return cnt;
     }
 };
