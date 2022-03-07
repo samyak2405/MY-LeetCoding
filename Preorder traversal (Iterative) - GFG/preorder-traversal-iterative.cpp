@@ -102,23 +102,18 @@ class Solution{
         vector<int> res;
         if(!root)
             return res;
-        Node *t = root;
         stack<Node *> s1;
-        s1.push(t);
-        
+        s1.push(root);
         while(!s1.empty())
         {
             Node *tmp = s1.top();
             s1.pop();
             res.push_back(tmp->data);
-            
             if(tmp->right)
                 s1.push(tmp->right);
             if(tmp->left)
                 s1.push(tmp->left);
         }
-        
-        
         return res;
     }
 };
