@@ -100,26 +100,28 @@ class Solution{
     // root : the root Node of the given BST
     // target : the target sum
     
-    void inorder(Node *root,set<int> &s1)
+    void inorder(Node *root,map<int,int> &m)
     {
-        if(!root)
+        if(root==NULL)
             return;
-        s1.insert(root->data);
-        inorder(root->left,s1);
-        inorder(root->right,s1);
+     
+        inorder(root->left,m);
+        m[root->data]++;
+        inorder(root->right,m);
     }
     
     int isPairPresent(struct Node *root, int target)
     {
-        set<int> s1;
-        inorder(root,s1);
-        for(auto it:s1)
+        map<int,int> m;    
+        inorder(root,m);
+   
+        for(auto it:m)
         {
-            int x =target- it;
-            if(s1.find(x)!=s1.end())
-                return true;
+            int r=target-(it.first);
+            if(m.find(r)!=m.end())
+                return 1;
         }
-        return false;
+        return 0;
     }
 };
 
