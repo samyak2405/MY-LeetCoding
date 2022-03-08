@@ -34,8 +34,7 @@ char* reverse(char *S, int len)
     int k = 0;
     while(!s1.empty())
     {
-        S[k++] = s1.top();
-        s1.pop();
+        S[k++] = s1.top(),s1.pop();
     }
     return S;
 }
