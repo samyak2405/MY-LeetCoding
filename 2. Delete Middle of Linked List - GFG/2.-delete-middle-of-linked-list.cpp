@@ -72,14 +72,13 @@ Node* deleteMid(Node* head)
 {
     if(!head or !head->next)
         return NULL;
-    Node *slow = head,*fast = head,*prev = NULL;
-    while(fast and fast->next)
+    Node *p = head,*q = head,*prev = NULL;
+    while(q and q->next)
     {
-        prev = slow;
-        slow = slow->next;
-        fast = fast->next->next;
+        prev = p;
+        p = p->next;
+        q = q->next->next;
     }
-    prev->next = slow->next;
-    delete slow;
+    prev->next = prev->next->next;
     return head;
 }
