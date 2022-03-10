@@ -32,48 +32,41 @@ struct Node *start = NULL;
 class Solution
 {
     public:
-    void insert(Node *&head,Node *&tail,int d)
-    {
-        Node *newnode = new Node(d);
-        if(!head)
-        {
-            head = newnode;
-            tail = newnode;
-        }
-        else
-        {
-            tail->next = newnode;
-            tail = newnode;
-        }
-    }
+    //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
-        int cnt_0 = 0,cnt_1 = 0,cnt_2 = 0;
+        if(!head or !head->next)
+            return head;
+        Node *zero = new Node(0),*zerop = zero;
+        Node *one = new Node(0),*onep = one;
+        Node *two = new Node(0),*twop = two;
         Node *p = head;
+        
         while(p)
         {
+            Node *newnode = new Node(p->data);
             if(p->data==0)
-                cnt_0++;
-            else if(p->data==1)
-                cnt_1++;
+            {
+                zerop->next = newnode;
+                zerop = newnode;
+            }
+            else if(p->data ==1)
+            {
+                onep->next = newnode;
+                onep = newnode;
+            }
             else
-                cnt_2++;
+            {
+                twop->next = newnode;
+                twop = newnode;
+            }
             p = p->next;
         }
-        Node *head1 = NULL,*tail = NULL;
-        while(cnt_0--)
-        {
-            insert(head1,tail,0);
-        }
-        while(cnt_1--)
-        {
-            insert(head1,tail,1);
-        }
-        while(cnt_2--)
-        {
-            insert(head1,tail,2);
-        }
-        
-        return head1;
+        zerop->next = one->next;
+        if(!one->next)
+            zerop->next = two->next;
+        else
+            onep->next = two->next;
+        return zero->next;
     }
 };
 
