@@ -10,40 +10,19 @@
  */
 class Solution {
 public:
-    
-    void insert(ListNode *&head,ListNode *&tail,vector<int> &v1,int start)
-    {
-        for(int i = start;i<v1.size();i+=2)
-        {
-            ListNode *newnode = new ListNode(v1[i]);
-            if(!head)
-            {
-                head = newnode;
-                tail = newnode;
-            }
-            else
-            {
-                tail->next = newnode;
-                tail = newnode;
-            }
-        }
-    }
-    
     ListNode* oddEvenList(ListNode* head) {
         if(!head or !head->next)
             return head;
-        ListNode *p = head;
-        vector<int> v1;
-        while(p)
+        ListNode *odd = head,*even = head->next;
+        ListNode *evenhead = even;
+        while(even and even->next)
         {
-            v1.push_back(p->val);
-            p = p->next;
+            odd->next = even->next;
+            odd = odd->next;
+            even->next = odd->next;
+            even = even->next;
         }
-        ListNode *head1 = NULL,*tail1 = NULL;
-        
-        insert(head1,tail1,v1,0);
-        insert(head1,tail1,v1,1);
-        
-        return head1;
+        odd->next = evenhead;
+        return head;
     }
 };
