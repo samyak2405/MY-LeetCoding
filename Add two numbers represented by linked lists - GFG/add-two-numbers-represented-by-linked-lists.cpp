@@ -60,59 +60,42 @@ struct Node {
 class Solution
 {
     public:
-    void reversal(struct Node *&head)
+    //Function to add two numbers represented by linked list
+    
+    void reversal(Node *&head)
     {
-        struct Node *prev = NULL,*curr = head,*forward = NULL;
-        
+        Node *prev = NULL,*forward = NULL,*curr = head;
         while(curr)
         {
             forward = curr->next;
             curr->next = prev;
-            prev = curr; 
+            prev = curr;
             curr = forward;
         }
-        
         head = prev;
     }
-    struct Node* addTwoLists(struct Node* l1, struct Node* l2)
+    
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
     {
-        if(!l1 and !l2)
-            return l1;
-        if(!l1 and l2)
-            return l2;
-        if(l1 and !l2)
-            return l1;
-        reversal(l1);
-        reversal(l2);
-        struct Node *l3=NULL;
+        reversal(first);
+        reversal(second);
         int c = 0;
-        struct Node *p = l1,*q = l2,*r = NULL;
-        while(p or q)
+        Node *newhead = new Node(0);
+        Node *t = newhead;
+        while(c or first or second)
         {
-            c += p?p->data:0;
-            c += q?q->data:0;
-            if(l3==NULL)
-            {
-                l3 = new Node(c%10);
-                r = l3;
-            }
-            else
-            {
-                r->next = new Node(c%10);
-                r = r->next;
-            }
-                
-            c = c>=10?1:0;
-            p=p?p->next:NULL;
-            q=q?q->next:NULL;
+            c+=(first?first->data:0)+(second?second->data:0);
+            t->next = new Node(c%10);
+            c/=10;
+            t = t->next;
+            if(first)
+                first = first->next;
+            if(second)
+                second = second->next;
         }
-        if(c==1)
-        {
-            r->next = new Node(1);
-        }
-        reversal(l3);
-        
-        return l3;
+        newhead = newhead->next;
+        reversal(newhead);
+        return newhead;
     }
 };
 
