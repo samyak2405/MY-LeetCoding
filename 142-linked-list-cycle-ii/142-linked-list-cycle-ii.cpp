@@ -10,10 +10,9 @@ class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
         if(!head)
-            return head;
-        if(!head->next)
             return NULL;
-        ListNode *p = head,*q = head;
+        ListNode *p = head;
+        ListNode *q = head;
         while(p and q and q->next)
         {
             p = p->next;
@@ -23,11 +22,11 @@ public:
                 p = head;
                 while(p!=q)
                 {
-                    p=p->next;
+
+                    p = p->next;
                     q = q->next;
                 }
-                if(p==q)
-                    return p;
+                return p;
             }
         }
         return NULL;
