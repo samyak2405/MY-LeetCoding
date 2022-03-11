@@ -85,13 +85,8 @@ struct Node {
 int getLength(Node *head1)
 {
     int cnt = 0;
-    
     while(head1)
-    {
-        cnt++;
-        head1 = head1->next;
-    }
-    
+        cnt++,head1 = head1->next;
     return cnt;
 }
 
@@ -105,16 +100,12 @@ int intersectPoint(Node* head1, Node* head2)
 {
     int n1 = getLength(head1);
     int n2 = getLength(head2);
-    if(n1==0 or n2==0)
-        return -1;
-    if(n1>n2)
-    {
-        sameLen(head1,n1-n2);
-    }
-    else
-    {
-        sameLen(head2,n2-n1);
-    }
+    
+    if(n1==0 or n2==0) return -1;
+        
+    if(n1>n2) sameLen(head1,n1-n2);
+    else sameLen(head2,n2-n1);
+    
     while(head1 and head2 and head1!=head2)
     {
         head1 = head1->next;
@@ -124,4 +115,3 @@ int intersectPoint(Node* head1, Node* head2)
         return -1;
     return head1->data;
 }
-
