@@ -51,31 +51,22 @@ class Solution
     public:
     struct node *reverse (struct node *head, int k)
     { 
-        vector<int> v1;
-        node *p = head;
-        while(p)
+        node *prev = NULL,*forward = NULL,*curr = head;
+        int cnt = 0;
+        while(curr and cnt<k)
         {
-            int t = k;
-            vector<int> tmp;
-            while(p and t)
-            {
-                t--;
-                tmp.push_back(p->data);
-                p = p->next;
-            }
-            std::reverse(tmp.begin(),tmp.end());
-            for(auto it:tmp)
-                v1.emplace_back(it);
+            forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+            cnt++;
         }
-        node *head1 = new node(0);
-        node *tail1 = head1;
-        for(auto it:v1)
+        if(forward)
         {
-            node *newnode = new node(it);
-            tail1->next = newnode;
-            tail1 = newnode;
+            node *rest_head = reverse(forward,k);
+            head->next = rest_head;
         }
-        return head1->next;
+        return prev;
     }
 };
 
