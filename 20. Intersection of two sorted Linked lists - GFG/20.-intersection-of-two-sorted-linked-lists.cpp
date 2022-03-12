@@ -83,12 +83,6 @@ struct Node
 
 Node* findIntersection(Node* head1, Node* head2)
 {
-    if(!head1 and !head2)
-        return NULL;
-    if(!head1)
-        return head2;
-    if(!head2)
-        return head1;
     Node *p = head1,*q = head2;
     Node *head = new Node(0);
     Node *tail = head;
