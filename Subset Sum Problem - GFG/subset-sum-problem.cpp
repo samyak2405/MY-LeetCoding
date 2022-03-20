@@ -9,22 +9,35 @@ using namespace std;
 
 class Solution{   
 public:
-    bool isSubsetSum(int N, int arr[], int sum){
-        vector<vector<int>> dp(N+1,vector<int>(sum+1,0));
-        for(int i = 0;i<N+1;i++)
-            dp[i][0] = 1;
-            
-        for(int i = 1;i<N+1;i++)
+
+    bool solve(vector<int> &arr,int sum,int n)
+    {
+        if(sum==0 or n==0)
+            return true;
+        if(arr[n-1]<=sum)
+            return solve(arr,sum-arr[n-1],n-1) or solve(arr,sum,n-1);
+        if(arr[n-1]>sum)
+            return solve(arr,sum,n-1);
+    }
+
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<vector<int>> dp(n+1,vector<int>(sum+1,0));
+        for(int i = 0;i<=n;i++)
         {
-            for(int j = 1;j<sum+1;j++)
+            for(int j = 0;j<=sum;j++)
             {
-                if(arr[i-1]<=j)
+                if(i==0)
+                    dp[i][j] = 0;
+                if(j==0)
+                    dp[i][j] = 1;
+                if(i>0 and arr[i-1]<=j)
                     dp[i][j] = dp[i-1][j-arr[i-1]] or dp[i-1][j];
-                else
+                else if(i>0 and arr[i-1]>j)
                     dp[i][j] = dp[i-1][j];
             }
         }
-        return dp[N][sum];
+        return dp[n][sum];
     }
 };
 
@@ -37,14 +50,14 @@ int main()
     {
         int N, sum;
         cin >> N;
-        int arr[N];
+        vector<int> arr(N);
         for(int i = 0; i < N; i++){
             cin >> arr[i];
         }
         cin >> sum;
         
         Solution ob;
-        cout << ob.isSubsetSum(N, arr, sum) << endl;
+        cout << ob.isSubsetSum(arr, sum) << endl;
     }
     return 0; 
 } 
