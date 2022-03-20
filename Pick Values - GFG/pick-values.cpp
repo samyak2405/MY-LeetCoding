@@ -10,12 +10,12 @@ using namespace std;
 class Solution{   
 public:
     int pickValues(int arr[], int n) {
-        if(n==1)
-            return arr[0];
-        if(n==2)
-            return min(arr[0],arr[1]);
-        if(n==3)
-            return min({arr[0],arr[1],arr[2]});
+        // if(n==1)
+        //     return arr[0];
+        // if(n==2)
+        //     return min(arr[0],arr[1]);
+        // if(n==3)
+        //     return min({arr[0],arr[1],arr[2]});
         int dp[n];
         for(int i =0;i<n;i++)
         {
