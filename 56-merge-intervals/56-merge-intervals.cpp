@@ -2,40 +2,24 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         vector<vector<int>> res;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        int i = 0;
-        while(i<intervals.size())
+        if(!intervals.size())
+            return res;
+        sort(intervals.begin(),intervals.end());
+        vector<int> tmp = intervals[0];
+        
+        for(auto it:intervals)
         {
-            pair<int,int> p = {intervals[i][0],intervals[i][1]};
-            pq.push(p);
-            i++;
-        }
-        while(!pq.empty())
-        {
-            pair<int,int> p = pq.top();
-            pq.pop();
-            if(pq.empty())
+            if(it[0]<=tmp[1])
             {
-                pq.push(p);
-                break;
+                tmp[1] = max(it[1],tmp[1]);
             }
-            pair<int,int> q = pq.top();
-            pq.pop();
-            if(p.second>=q.first)
+            else
             {
-                pq.push({p.first,max(q.second,p.second)});
-            }
-            else if(p.second<q.first)
-            {
-                res.push_back(vector<int>{p.first,p.second});
-                pq.push(q);
+                res.push_back(tmp);
+                tmp = it;
             }
         }
-        while(!pq.empty())
-        {
-            res.push_back(vector<int>{pq.top().first,pq.top().second});
-            pq.pop();
-        }
+        res.push_back(tmp);
         return res;
     }
 };
