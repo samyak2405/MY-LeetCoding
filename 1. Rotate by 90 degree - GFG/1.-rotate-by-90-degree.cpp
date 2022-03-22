@@ -11,27 +11,20 @@ void rotate (vector<vector<int> >& matrix);
 
 /* matrix : given input matrix, you are require 
  to change it in place without using extra space */
-void rotate(vector<vector<int> >& arr)
+void rotate(vector<vector<int> >& matrix)
 {
-    int n = arr.size();
-    for(int i = 0;i<n;i++)
+    int n = matrix.size();
+    for(int i = 0;i<n/2;i++)
     {
-        int j = 0;
-        int k = n-1;
-        while(j<k)
-            swap(arr[i][j++],arr[i][k--]);
-    }
-    for(int i = 0;i<n;i++)
-    {
-        for(int j = i+1;j<n;j++)
+        for(int j = i;j<n-i-1;j++)
         {
-            if(i==j)
-                continue;
-            else
-                swap(arr[i][j],arr[j][i]);
+            int tmp = matrix[i][j];
+            matrix[i][j] = matrix[j][n-i-1];
+            matrix[j][n-i-1] = matrix[n-i-1][n-j-1];
+            matrix[n-i-1][n-j-1] = matrix[n-j-1][i];
+            matrix[n-j-1][i] = tmp;
         }
     }
-    return;
 }
 
 
