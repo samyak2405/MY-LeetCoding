@@ -1,9 +1,7 @@
 class Solution {
 public:
     string getSmallestString(int n, int k) {
-        string res;
-        for(int i = 0;i<n;i++)
-            res+='a';
+        string res(n,'a');
         k-=n;
         int i = n-1;
         while(k)
