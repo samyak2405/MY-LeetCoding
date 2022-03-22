@@ -8,8 +8,7 @@ public:
         {
             if(k>=25)
             {
-                res[i]+=25;
-                i--;
+                res[i--]+=25;
                 k-=25;
             }
             else
