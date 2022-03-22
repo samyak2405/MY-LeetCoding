@@ -1,7 +1,9 @@
 class Solution {
 public:
     string getSmallestString(int n, int k) {
-        vector<int> res(n,1);
+        string res;
+        for(int i = 0;i<n;i++)
+            res+='a';
         k-=n;
         int i = n-1;
         while(k)
@@ -18,9 +20,6 @@ public:
                 k = 0;
             }
         }
-        string result = "";
-        for(auto it:res)
-            result+=('a'+it-1);
-        return result;
+        return res;
     }
 };
