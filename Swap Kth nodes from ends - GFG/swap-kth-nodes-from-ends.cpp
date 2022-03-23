@@ -85,27 +85,18 @@ Node *swapkthnode(Node* head, int n, int k)
         second = second->next;
     }
     
+    if(fprev)
+        fprev->next = second;
+    if(sprev)
+        sprev->next = first;
+    
+    temp = first->next;
+    first->next = second->next;
+    second->next = temp;
+    
     if(k==1)
-    {
-        sprev->next = first;
-        second->next = first->next;
-        first->next = NULL;
         return second;
-    }
     if(k==n)
-    {
-        fprev->next = second;
-        first->next = second->next;
-        second->next = NULL;
         return first;
-    }
-    else
-    {
-        fprev->next = second;
-        sprev->next = first;
-        temp = first->next;
-        first->next = second->next;
-        second->next = temp;
-    }
     return head;
 }
