@@ -10,45 +10,27 @@ using namespace std;
 class Solution{   
 public:
     int findMaxAverage(int arr[], int n, int k) {
-        // int i = 0,j = 0;
-        // int sum = 0;
-        // int max_start = 0;
-        // int max_avg = 0;
-        // while(j<n)
-        // {
-        //     sum+=arr[j];
-        //     if(j-i+1<k)
-        //         j++;
-        //     else if(j-i+1==k)
-        //     {
-        //         if(max_avg<=sum)
-        //         {
-        //             max_avg = sum;
-        //             max_start = i;
-        //         }
-        //         sum-=arr[i++];
-        //         j++;
-        //     }
-        // }
-        // return max_start;
-        int i=0 ,j=0;
+        int i = 0,j = 0;
+        int sum = 0;
+        int max_start = 0;
         int ans = INT_MIN;
-        int s,e;
-        int sum=0;
-        while(j<n){
-            sum += arr[j];
-            if(j-i+1 == k){
-                if(ans<=sum){
-                    s=i;
-                    e=j;
-                    ans= sum;
+        while(j<n)
+        {
+            sum+=arr[j];
+            if(j-i+1==k)
+            {
+                if(ans<=sum)
+                {
+                    max_start = i;
+                    ans = sum;
                 }
-                sum -= arr[i];
+                sum-=arr[i];
                 i++;
             }
             j++;
         }
-        return s;
+        return max_start;
+        
     }
 };
 
