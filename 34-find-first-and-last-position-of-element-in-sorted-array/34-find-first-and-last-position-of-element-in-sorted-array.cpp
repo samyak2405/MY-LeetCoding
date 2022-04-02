@@ -1,47 +1,35 @@
 class Solution {
 public:
-    
-    int lbs(vector<int> &nums,int target)
-    {
-        int ans = -1;
-        int low = 0,high = nums.size()-1;
-        while(low<=high)
-        {
-            int mid = low+(high-low)/2;
-            if(nums[mid]==target)
-            {
-                ans = mid;
-                low = mid+1;
-            }
-            else if(nums[mid]<target)
-                low = mid+1;
-            else
-                high = mid-1;
-        }
-        return ans;
-    }
-    
-    int fbs(vector<int> &nums,int target)
-    {
-        int ans = -1;
-        int low = 0,high = nums.size()-1;
-        while(low<=high)
-        {
-            int mid = low+(high-low)/2;
-            if(nums[mid]==target)
-            {
-                ans = mid;
-                high = mid-1;
-            }
-            else if(nums[mid]<target)
-                low = mid+1;
-            else
-                high = mid-1;
-        }
-        return ans;
-    }
-    
     vector<int> searchRange(vector<int>& nums, int target) {
-        return vector<int>{fbs(nums,target),lbs(nums,target)};
+        vector<int> res(2,-1);
+        if(!nums.size())
+            return res;
+        int i = 0,j = nums.size()-1;
+        while(i<j)
+        {
+            int mid = (i+j)/2;
+            if(nums[mid]<target)
+                i = mid+1;
+            else
+                j = mid;
+        }
+        
+        if(nums[i]!=target)
+            return res;
+        else
+            res[0] = i;
+        
+        j = nums.size()-1;
+        
+        while(i<j)
+        {
+            int mid = (i+j)/2+1;
+            if(nums[mid]>target)
+                j = mid-1;
+            else
+                i = mid;
+        }
+        res[1] = j;
+        return res;
     }
 };
