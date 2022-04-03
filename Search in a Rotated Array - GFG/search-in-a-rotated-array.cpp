@@ -6,37 +6,19 @@ using namespace std;
 class Solution{
     public:
     
-    int binarySearch(int nums[],int start,int end,int key)
-    {
-        while(start<=end)
-        {
-            int mid = start+(end-start)/2;
-            if(nums[mid]==key)
-                return mid;
-            if(nums[mid]<key)
-                start = mid+1;
-            else
-                end = mid-1;
-        }
-        return -1;
-    }
-    
-    int search(int nums[], int l, int h, int key){
-        int start = l;
-        int end = h;
-        while(start<end)
-        {
-            if(nums[start]<nums[end])
-                break;
-            int mid = start+(end-start)/2;
-            if(nums[mid]>=nums[start])
-                start = mid+1;
-            else
-                end = mid;
-        }
-        int x = binarySearch(nums,l,start-1,key);
-        int y = binarySearch(nums,start,h,key);
-        return x!=-1?x:y;
+    int search(int A[], int l, int h, int key){
+        if (l > h) return -1; 
+    int mid = (l+h)/2; 
+    if (A[mid] == key) return mid; 
+
+    if (A[l] <= A[mid]) { 
+        if (key >= A[l] && key <= A[mid]) 
+        return search(A, l, mid-1, key); 
+        return search(A, mid+1, h, key); 
+    } 
+    if (key >= A[mid] && key <= A[h]) 
+        return search(A, mid+1, h, key); 
+    return search(A, l, mid-1, key); 
     }
 };
 
