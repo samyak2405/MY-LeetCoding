@@ -6,13 +6,19 @@ public:
         for(int i = 0;i<arr1.size();i++)
         {
             bool flag = true;
-            for(int j = 0;j<arr2.size();j++)
+            int low = 0,high = arr2.size()-1;
+            while(low<=high)
             {
-                if(abs(arr1[i]-arr2[j])<=d)
+                int mid = low+(high-low)/2;
+                if(abs(arr1[i]-arr2[mid])<=d)
                 {
                     flag = false;
                     break;
                 }
+                if(arr1[i]<arr2[mid])
+                    high = mid-1;
+                else
+                    low = mid+1;
             }
             if(flag)
                 cnt++;
