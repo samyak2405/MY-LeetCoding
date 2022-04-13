@@ -5,32 +5,18 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
-	
-	int coinchange(vector<int> &nums,vector<int> &dp,int amt)
-	{
-	    if(amt<0)
-	        return -1;
-	    if(amt==0)
-	        return 0;
-	    if(dp[amt]!=0)
-	        return dp[amt];
-	    int minimum = INT_MAX;
-	    for(auto it:nums)
-	    {
-	        int change = coinchange(nums,dp,amt-it);
-	        if(change>=0 and change<minimum)
-	            minimum = 1+change;
-	    }
-	    dp[amt] = (minimum == INT_MAX)?-1:minimum;
-	    return dp[amt];
-	}
-	
 	int MinCoin(vector<int>nums, int amt)
 	{
-	    if(amt<1)
-	        return 0;
-	   vector<int> dp(amt+1);
-	   return coinchange(nums,dp,amt);
+	    vector<int> dp(amt+1,amt+1);
+	    sort(nums.begin(),nums.end());
+	    dp[0] = 0;
+	    for(int i = 1;i<amt+1;i++)
+	    {
+	        for(int j = 0;j<nums.size() and nums[j]<=i;j++)
+	        {
+	                dp[i] = min(dp[i],dp[i-nums[j]]+1);
+	 
+	    return (dp[amt]==amt+1)?-1:dp[amt];
 	}
 };
 
