@@ -110,28 +110,22 @@ struct Node {
 class Solution{
   public:
     // returns the inorder successor of the Node x in BST (rooted at 'root')
-    
-    void min_order(Node *root,Node *x,Node *&res,int min)
-    {
-        if(!root)
-            return;
-        if(root->data<min and root->data>x->data)
-        {
-            min = root->data;
-            res = root;
-        }
-        if(root->left)
-            min_order(root->left,x,res,min);
-        if(root->right)
-            min_order(root->right,x,res,min);
-            
-    }
-    
     Node * inOrderSuccessor(Node *root, Node *x)
     {
-        Node *res=NULL;
-        min_order(root,x,res,INT_MAX);
-        return !res?new Node(-1):res;
+        if(!root or !x)
+            return NULL;
+        Node *suc = NULL;
+        while(root)
+        {
+            if(root->data<=x->data)
+                root = root->right;
+            else
+            {
+                suc = root;
+                root = root->left;
+            }
+        }
+        return suc;
     }
 };
 
