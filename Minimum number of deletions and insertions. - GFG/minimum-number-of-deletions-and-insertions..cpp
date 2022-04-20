@@ -24,9 +24,7 @@ class Solution{
 	                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
 	        }
 	    }
-	    int cnt = n - dp[n][m];
-	    cnt += m - dp[n][m];  
-	    return cnt;
+	    return n-dp[n][m] + m-dp[n][m];
 	} 
 };
 
