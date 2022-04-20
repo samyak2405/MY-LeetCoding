@@ -23,8 +23,6 @@ public:
     
     int minDistance(string word1, string word2) {
         int len = longestCommonSubsequence(word1,word2);
-        int cnt = word1.length()-len;
-        cnt += word2.length()-len;
-        return cnt;
+        return word1.length()-len + word2.length()-len;
     }
 };
