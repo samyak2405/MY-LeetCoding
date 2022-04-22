@@ -51,7 +51,7 @@ public:
             }
             prev = curr;
         }
-        return prev[m];
+        return (int)prev[m];
         
     }
 };
