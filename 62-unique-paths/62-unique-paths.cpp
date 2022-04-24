@@ -1,21 +1,21 @@
 class Solution {
 public:
     
-    int binomial(int n,int k)
+    int f(int i,int j,vector<vector<int>> &dp)
     {
-        if(k>n-k)
-            k = n-k;
-        long long int res = 1;
-        
-        for(int i = 0;i<k;i++)
-        {
-            res*=(n-i);
-            res/=(i+1);
-        }
-        return res;
+        if(i==0 and j==0)
+            return 1;
+        if(i<0 or j<0)
+            return 0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        int right = f(i-1,j,dp);
+        int down = f(i,j-1,dp);
+        return dp[i][j] = right+down;
     }
     
     int uniquePaths(int m, int n) {
-        return binomial(m+n-2,m-1);
+        vector<vector<int>> dp(m,vector<int>(n,-1));
+        return f(m-1,n-1,dp);
     }
 };
