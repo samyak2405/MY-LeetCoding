@@ -17,17 +17,19 @@ public:
         int n = nums.size();
         // vector<vector<int>> dp(n,vector<int>(n+1,-1));
         // return f(0,-1,nums,dp);
-        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        // vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        vector<int> curr(n+1,0),ahead(n+1,0);
         for(int ind = n-1;ind>=0;ind--)
         {
             for(int prev = ind-1;prev>=-1;prev--)
             {
-                int len = dp[ind+1][prev+1];
+                int len = ahead[prev+1];
                 if(prev == -1 or nums[prev]<nums[ind])
-                    len = max(len,1+dp[ind+1][ind+1]);
-                dp[ind][prev+1] = len;
+                    len = max(len,1+ahead[ind+1]);
+                curr[prev+1] = len;
             }
+            ahead = curr;
         }
-        return dp[0][-1+1];
+        return ahead[0];
     }
 };
