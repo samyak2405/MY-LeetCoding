@@ -14,7 +14,7 @@ class Solution{
 	
 	int maxSumIS(int arr[], int n)  
 	{  
-	    vector<int> dp(n,1);
+	    vector<int> dp(n,0);
 	    int maxi = 0;
 	    for(int i = 0;i<n;i++)
 	    {
