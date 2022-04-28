@@ -19,19 +19,34 @@ public:
         reverse(s2.begin(),s2.end());
         // vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
         // return f(s1,s2,n,m,dp);
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
-        for(int i = 0;i<n+1;i++)
+        // vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        // for(int i = 0;i<n+1;i++)
+        // {
+        //     for(int j = 0;j<m+1;j++)
+        //     {
+        //         if(i==0 or j==0)
+        //             continue;
+        //         else if(s1[i-1]==s2[j-1])
+        //             dp[i][j] = 1+dp[i-1][j-1];
+        //         else
+        //             dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+        //     }
+        // }
+        // return dp[n][m];
+        vector<int> prev(m+1,0),curr(m+1,0);
+        for(int i=0;i<n+1;i++)
         {
             for(int j = 0;j<m+1;j++)
             {
                 if(i==0 or j==0)
                     continue;
                 else if(s1[i-1]==s2[j-1])
-                    dp[i][j] = 1+dp[i-1][j-1];
+                    curr[j] = 1+prev[j-1];
                 else
-                    dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+                    curr[j] = max(curr[j-1],prev[j]);
             }
+            prev = curr;
         }
-        return dp[n][m];
+        return prev[m];
     }
 };
