@@ -3,16 +3,23 @@ public:
     
     bool bipartite(map<int,vector<int>> &mp,vector<int> &color,int start)
     {
-        for(auto it:mp[start])
+        queue<int> q;
+        q.push(start);
+        color[start] = 1;
+        while(!q.empty())
         {
-            if(color[it]==-1)
+            int node = q.front();
+            q.pop();
+            for(auto it:mp[node])
             {
-                color[it] = 1-color[start];
-                if(!bipartite(mp,color,it))
+                if(color[it]==-1)
+                {
+                    color[it] = 1-color[node];
+                    q.push(it);
+                }
+                else if(color[it]==color[node])
                     return false;
             }
-            else if(color[it]==color[start])
-                return false;
         }
         return true;
     }
@@ -27,7 +34,6 @@ public:
         {
             if(color[i]==-1)
             {
-                color[i] = 1;
                 if(!bipartite(mp,color,i))
                     return false;
             }
