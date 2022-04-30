@@ -6,41 +6,14 @@ using namespace std;
 class Solution {
   public:
     // Function to return Breadth First Traversal of given graph.
-    
-    void bfs(vector<int> adj[],vector<int> &res,vector<bool> &vis,int start)
-    {
-        queue<int> q;
-        q.push(start);
-        vis[start] = true;
-        while(!q.empty())
-        {
-            int node = q.front();
-            q.pop();
-            res.push_back(node);
-            for(auto it:adj[node])
-            {
-                if(!vis[it])
-                {
-                    q.push(it);
-                    vis[it] = true;
-                }    
-            }
-        }
-    }
-    
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         vector<int> res;
-        if(V==0)
-            return res;
         vector<bool> vis(V,0);
-        int start = 0;
         queue<int> q;
-        q.push(start);
-        vis[start] = true;
-        for(int i = 0;i<V;i++)
+        q.push(0);
+        vis[0] = true;
+        for(int i = 1;i<V;i++)
         {
-            // if(!vis[i])
-            //     bfs(adj,res,vis,i);
             if(!vis[i])
             {
                 while(!q.empty())
@@ -54,7 +27,7 @@ class Solution {
                         {
                             q.push(it);
                             vis[it] = true;
-                        }    
+                        }
                     }
                 }
             }
