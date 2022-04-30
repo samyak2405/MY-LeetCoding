@@ -21,8 +21,8 @@ class Solution {
             {
                 if(!vis[it])
                 {
+                    vis[it] = true;
                     q.push({it,node});
-                    vis[it]=true;
                 }
                 else if(it!=parent)
                     return true;
@@ -34,13 +34,9 @@ class Solution {
     bool isCycle(int V, vector<int> adj[]) {
         vector<bool> vis(V,0);
         for(int i = 0;i<V;i++)
-        {
             if(!vis[i])
-            {
                 if(cycle(adj,vis,i))
                     return true;
-            }
-        }
         return false;
     }
 };
