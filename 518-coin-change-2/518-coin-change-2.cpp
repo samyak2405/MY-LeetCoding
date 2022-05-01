@@ -2,7 +2,6 @@ class Solution {
 public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        vector<vector<int>> dp(n+1,vector<int>(amount+1,0));
         vector<int> prev(amount+1,0),curr(amount+1,0);
         prev[0]=curr[0] = 1;
         for(int i = 1;i<n+1;i++)
