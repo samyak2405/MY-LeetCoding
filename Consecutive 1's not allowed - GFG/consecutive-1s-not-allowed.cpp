@@ -9,22 +9,23 @@ using namespace std;
 class Solution{
 public:
 	// #define ll long long
-	
-	ll count(int n,vector<ll> &dp,int mod)
-	{
-	    if(n==1)
-	        return dp[n] = 2;
-	    if(n==2)
-	        return dp[n] = 3;
-	    if(dp[n]!=-1)
-	        return dp[n];
-	    
-	    return dp[n] = (count(n-1,dp,mod)+count(n-2,dp,mod))%mod;
-	}
-	
 	ll countStrings(int n) {
-	    vector<ll> dp(n+1,-1);
-	    return count(n,dp,1e9+7);
+	    
+	    ll a = 2;
+	    if(n==1)
+	        return a;
+	    ll b = 3;
+	    if(n==2)
+	        return b;
+	    int mod = 1e9+7;
+	    ll c;
+	    for(int i = 3;i<=n;i++)
+	    {
+	        c = (a+b)%mod;
+	        a = b;
+	        b = c;
+	    }
+	    return c;
 	}
 };
 
