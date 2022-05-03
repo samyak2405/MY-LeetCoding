@@ -19,7 +19,7 @@ public:
 	    if(dp[n]!=-1)
 	        return dp[n];
 	    
-	    return dp[n] = (count(n-1,dp,mod)%mod+count(n-2,dp,mod)%mod)%mod;
+	    return dp[n] = (count(n-1,dp,mod)+count(n-2,dp,mod))%mod;
 	}
 	
 	ll countStrings(int n) {
