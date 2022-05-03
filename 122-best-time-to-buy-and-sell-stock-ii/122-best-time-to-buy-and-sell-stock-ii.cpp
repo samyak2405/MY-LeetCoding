@@ -1,15 +1,27 @@
 class Solution {
 public:
+    
+    int f(int ind,bool buy,vector<int> &prices,vector<vector<int>> &dp)
+    {
+        if(ind==prices.size())
+            return 0;
+        if(dp[ind][buy]!=-1)
+            return dp[ind][buy];
+        int profit = 0;
+        if(buy)
+            profit = max(-prices[ind]+f(ind+1,0,prices,dp),f(ind+1,1,prices,dp));
+        else
+            profit = max(prices[ind]+f(ind+1,1,prices,dp),f(ind+1,0,prices,dp));
+        return dp[ind][buy] = profit;
+    }
+    
     int maxProfit(vector<int>& prices) {
-        int currbuy,currnotbuy,aheadbuy = 0,aheadnotbuy = 0;
         int n = prices.size();
-        for(int ind = n-1;ind>=0;ind--)
-        {
-            currnotbuy = max(prices[ind]+aheadbuy,aheadnotbuy);
-            currbuy = max(-prices[ind]+aheadnotbuy,aheadbuy);
-            aheadbuy = currbuy;
-            aheadnotbuy = currnotbuy;
-        }
-        return currbuy;
+        //recursion
+        // return f(0,1,prices);
+        
+        //memoization
+        vector<vector<int>> dp(n,vector<int>(2,-1));
+        return f(0,1,prices,dp);
     }
 };
