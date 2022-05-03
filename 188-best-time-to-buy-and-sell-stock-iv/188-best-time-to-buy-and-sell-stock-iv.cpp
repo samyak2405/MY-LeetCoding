@@ -1,24 +1,45 @@
 class Solution {
 public:
+    
+    //recursion
+    // int f(int ind,bool buy,vector<int> &prices,int k)
+    // {
+    //     if(ind==prices.size())
+    //         return 0;
+    //     if(k==0)
+    //         return 0;
+    //     int profit = 0;
+    //     if(buy)
+    //         profit = max(-prices[ind]+f(ind+1,0,prices,k),f(ind+1,1,prices,k));
+    //     else
+    //         profit = max(prices[ind]+f(ind+1,1,prices,k-1),f(ind+1,0,prices,k));
+    //     return profit;
+    // }
+    
+    //memoization
+    int f(int ind,bool buy,vector<int> &prices,int k,vector<vector<vector<int>>> &dp)
+    {
+        if(ind==prices.size())
+            return 0;
+        if(k==0)
+            return 0;
+        if(dp[ind][buy][k]!=-1)
+            return dp[ind][buy][k];
+        int profit = 0;
+        if(buy)
+            profit = max(-prices[ind]+f(ind+1,0,prices,k,dp),f(ind+1,1,prices,k,dp));
+        else
+            profit = max(prices[ind]+f(ind+1,1,prices,k-1,dp),f(ind+1,0,prices,k,dp));
+        return dp[ind][buy][k] = profit;
+    }
+    
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();
-        vector<vector<vector<int>>> dp(n+1,vector<vector<int>> (2,vector<int>(k+1,0)));
+        //recursion
+        // return f(0,1,prices,k);
         
-        for(int i = n-1;i>=0;i--)
-        {
-            for(int j = 0;j<2;j++)
-            {
-                int profit = 0;
-                for(int l = 1;l<k+1;l++)
-                {
-                    if(j)
-                        profit = max(-prices[i]+dp[i+1][0][l],dp[i+1][1][l]);
-                    else
-                        profit = max(prices[i]+dp[i+1][1][l-1],dp[i+1][0][l]);
-                    dp[i][j][l] = profit;
-                }
-            }
-        }
-        return dp[0][1][k];
+        //memoization
+        vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(3,vector<int>(k+1,-1)));
+        return f(0,1,prices,k,dp);
     }
 };
