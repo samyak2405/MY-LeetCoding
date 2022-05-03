@@ -14,11 +14,11 @@ class Solution{
             return 0;
         }
         long long int nb2p1;
-        long long int nb2 = f(n/2,nb2p1,mod)%mod;
-        long long int a = (nb2*((2*nb2p1)%mod-nb2))%mod;
+        long long int nb2 = f(n/2,nb2p1,mod);
+        long long int a = (nb2*((2*nb2p1)-nb2))%mod;
         if(a<0)
             a += mod;
-        long long int b = ((nb2p1*nb2p1)%mod+(nb2*nb2)%mod)%mod;
+        long long int b = ((nb2p1*nb2p1)+(nb2*nb2))%mod;
         if(n%2==0)
         {
             next = b;
