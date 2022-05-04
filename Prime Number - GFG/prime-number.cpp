@@ -17,10 +17,10 @@ public:
                 if((N/i)!=i)
                     cnt++;
             }
+            if(cnt>2)
+                return false;
         }
-        if(cnt==2)
-            return true;
-        return false;
+        return true;
     }
 };
 
