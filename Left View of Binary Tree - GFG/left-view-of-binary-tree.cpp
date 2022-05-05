@@ -128,25 +128,25 @@ struct Node
 
 //Function to return a list containing elements of left view of the binary tree.
 
-void level_order(Node *root,int lvl,vector<vector<int>> &res)
+void level_order(Node *root,int lvl,int &reached,vector<int> &res)
 {
     if(!root)
         return;
-    if(res.size()==lvl)
-        res.push_back(vector<int>());
-    res[lvl].push_back(root->data);
-    level_order(root->left,lvl+1,res);
-    level_order(root->right,lvl+1,res);
+    if(reached<lvl)
+    {
+        res.push_back(root->data);
+        reached = lvl;
+    }
+    level_order(root->left,lvl+1,reached,res);
+    level_order(root->right,lvl+1,reached,res);
 }
 
 vector<int> leftView(Node *root)
 {
     vector<int> res;
-    vector<vector<int>> tmp;
     if(!root)
         return res;
-    level_order(root,0,tmp);
-    for(int i = 0;i<tmp.size();i++)
-        res.push_back(tmp[i][0]);
-    return res;
+   int reached = 0;
+   level_order(root,1,reached,res);
+   return res;
 }
