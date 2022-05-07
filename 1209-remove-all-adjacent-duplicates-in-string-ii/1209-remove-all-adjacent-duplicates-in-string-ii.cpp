@@ -29,8 +29,9 @@ public:
             s1.pop();
         }
         reverse(res.begin(),res.end());
-        if(res==s)
-            return res;
-        return removeDuplicates(res,k);
+        // if(res==s)
+        //     return res;
+        // return removeDuplicates(res,k);
+        return res;
     }
 };
