@@ -7,7 +7,19 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
     public:
+    // int mod = 1e9+7;
+    // long long f(int n,int k,vector<vector<long long>> &dp)
+    // {
+    //     if(n==1)
+    //         return dp[n][k] = k%mod;
+    //     if(n==2)
+    //         return dp[n][k] = (k%mod+(k*(k-1))%mod)%mod;
+    //     return dp[n][k] = (f(n-1,k,dp)%mod + (f(n-2,k,dp)*(k-1))%mod)%mod;
+    // }
+    
     long long countWays(int n, int k){
+        // vector<vector<long long>> dp(n+1,vector<long long>(k+1,-1));
+        // return f(n,k,dp);
         int mod = 1e9+7;
         if(n==1)
             return k;
