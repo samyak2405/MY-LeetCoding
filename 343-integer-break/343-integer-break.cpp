@@ -23,19 +23,20 @@ public:
             wt = (n/2)+1;
         else
             wt = n/2;
-        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        vector<int> curr(n+1,0),prev(n+1,0);
         for(int i = 1;i<=wt;i++)
         {
             for(int j = 0;j<=n;j++)
             {
                 if(j==0)
-                    dp[i][j] = 1;
+                    curr[j] = 1;
                 else if(i<=j)
-                    dp[i][j] = max(i*dp[i][j-i],dp[i-1][j]);
+                    curr[j] = max(i*curr[j-i],prev[j]);
                 else
-                    dp[i][j] = dp[i-1][j];
+                    curr[j] = prev[j];
             }
+            prev = curr;
         }
-        return dp[wt][n];
+        return prev[n];
     }
 };
