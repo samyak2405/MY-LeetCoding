@@ -12,10 +12,6 @@ public:
     }
     
     int integerBreak(int n) {
-        // if(n==3)
-        //     return 2;
-        // if(n==5)
-        //     return 6;
         if(n%2)
             return f((n/2)+1,n);
         return f(n/2,n);
