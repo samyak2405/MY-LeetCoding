@@ -14,6 +14,8 @@ class Solution{
         long long similar_color = k%mod;
         long long diff_color = (k*(k-1))%mod;
         long long total_ways = (diff_color + similar_color)%mod;
+        if(n==2)
+            return total_ways;
         for(int i = 3;i<=n;i++)
         {
             similar_color = diff_color%mod;
