@@ -11,16 +11,16 @@ class Solution{
         int mod = 1e9+7;
         if(n==1)
             return k;
-        long long same = k%mod;
-        long long diff = (k*(k-1))%mod;
-        long long total = (diff + same)%mod;
+        long long similar_color = k%mod;
+        long long diff_color = (k*(k-1))%mod;
+        long long total_ways = (diff_color + similar_color)%mod;
         for(int i = 3;i<=n;i++)
         {
-            same = diff%mod;
-            diff = (total*(k-1))%mod;
-            total = (same + diff)%mod;
+            similar_color = diff_color%mod;
+            diff_color = (total_ways*(k-1))%mod;
+            total_ways = (similar_color + diff_color)%mod;
         }
-        return total;
+        return total_ways;
     }
 };
 
