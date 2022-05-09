@@ -9,24 +9,28 @@ using namespace std;
 class Solution {
   public:
   
-    int dfs(int r,int c,int prev,int m,int n,vector<vector<int>> &matrix)
+    int dfs(int r,int c,int prev,int m,int n,vector<vector<int>> &matrix,vector<vector<int>> &dp)
     {
         if(r<0 or c<0 or r==m or c==n or prev>=matrix[r][c])
             return 0;
-        int v1 = dfs(r-1,c,matrix[r][c],m,n,matrix);
-        int v2 = dfs(r+1,c,matrix[r][c],m,n,matrix);
-        int v3 = dfs(r,c-1,matrix[r][c],m,n,matrix);
-        int v4 = dfs(r,c+1,matrix[r][c],m,n,matrix);
-        return 1+max(v1,max(v2,max(v3,v4)));
+        if(dp[r][c]!=-1)
+            return dp[r][c];
+        int v1 = dfs(r-1,c,matrix[r][c],m,n,matrix,dp);
+        int v2 = dfs(r+1,c,matrix[r][c],m,n,matrix,dp);
+        int v3 = dfs(r,c-1,matrix[r][c],m,n,matrix,dp);
+        int v4 = dfs(r,c+1,matrix[r][c],m,n,matrix,dp);
+        return dp[r][c] = 1+max(v1,max(v2,max(v3,v4)));
     }
   
     int longestIncreasingPath(vector<vector<int>>& matrix, int m, int n) {
         int ans = 0;
+        vector<vector<int>> dp(m,vector<int>(n,-1));
         for(int i = 0;i<m;i++)
         {
             for(int j = 0;j<n;j++)
             {
-                ans = max(ans,dfs(i,j,-1,m,n,matrix));
+                dfs(i,j,-1,m,n,matrix,dp);
+                ans = max(ans,dp[i][j]);
             }
         }
         return ans;
