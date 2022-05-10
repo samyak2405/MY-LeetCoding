@@ -16,7 +16,7 @@ public:
 	        return 0;
 	    if(dp[ind]!=-1)
 	        return dp[ind];
-	    return dp[ind] = max(arr[ind]+f(arr,ind+2,n,dp),f(arr,ind+1,n,dp));
+	    return dp[ind] = max(arr[ind] + f(arr,ind+2,n,dp),f(arr,ind+1,n,dp));
 	}
 	
 	int findMaxSum(int *arr, int n) {
