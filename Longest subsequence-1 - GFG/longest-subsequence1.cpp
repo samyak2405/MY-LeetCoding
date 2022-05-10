@@ -10,20 +10,20 @@ using namespace std;
 class Solution{
 public:
 
-    int f(int ind,int prev,int n,int arr[])
+    int f(int ind,int prev,int n,int arr[],vector<vector<int>> &dp)
     {
         if(ind==n)
             return 0;
         if(prev==-1 or abs(arr[prev]-arr[ind])==1)
-            return max(1+f(ind+1,ind,n,arr),f(ind+1,prev,n,arr));
+            return dp[ind][prev+1] = max(1+f(ind+1,ind,n,arr,dp),f(ind+1,prev,n,arr,dp));
         else
-            return f(ind+1,prev,n,arr);
+            return dp[ind][prev+1] = f(ind+1,prev,n,arr,dp);
     }
 
     int longestSubsequence(int n, int arr[])
     {
-        
-        return f(0,-1,n,arr);
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return f(0,-1,n,arr,dp);
     }
 };
 
