@@ -18,11 +18,12 @@ public:
             int broken = f(k-1,mid-1,dp);
             int not_broken = f(k,n-mid,dp);
             int tmp = 1+max(broken,not_broken);
+            mn = min(mn,tmp);
             if(broken<not_broken)
                 low = mid+1;
             else
                 high = mid-1;
-            mn = min(mn,tmp);
+            
         }
         return dp[k][n] =mn;
     }
