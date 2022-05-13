@@ -16,17 +16,15 @@ public:
     {
         if(!root)
             return;
+        sum+=root->val;
+        tmp.push_back(root->val);
         if(!root->left and !root->right)
         {
-            sum+=root->val;
-            tmp.push_back(root->val);
             tmp.push_back(sum);
             v1.push_back(tmp);
         }
         else
         {
-            sum+=root->val;
-            tmp.push_back(root->val);
             preorder(root->left,v1,tmp,sum);
             preorder(root->right,v1,tmp,sum);
         }
