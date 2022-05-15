@@ -9,30 +9,40 @@ class Solution
     public:
     //Function to find all possible unique subsets.
     
-    void subset(vector<int> &arr,vector<vector<int>> &res,set<vector<int>> &s1,int ind,vector<int> tmp)
+    void subset(vector<int> &arr,vector<vector<int>> &res,int ind,vector<int> curr)
     {
-        if(ind==arr.size())
+        if(ind>=arr.size())
         {
-            sort(tmp.begin(),tmp.end());
-            if(s1.find(tmp)==s1.end())
-            {
-                s1.insert(tmp);
-                res.push_back(tmp);
-            }
+            res.push_back(curr);
             return;
         }
-        tmp.push_back(arr[ind]);
-        subset(arr,res,s1,ind+1,tmp);
-        tmp.pop_back();
-        subset(arr,res,s1,ind+1,tmp);
+        int currind = ind+1;
+        while(currind<arr.size() and arr[currind]==arr[ind])
+            currind++;
+        int cnt = currind-ind;
+        for(int i = 0;i<=cnt;i++)
+        {
+            for(int j = 0;j<i;j++)
+            {
+                curr.push_back(arr[ind]);
+            }
+            
+            subset(arr,res,currind,curr);
+            
+            for(int j = 0;j<i;j++)
+            {
+                curr.pop_back();
+            }
+        }
     }
     
     vector<vector<int> > AllSubsets(vector<int> arr, int n)
     {
+        sort(arr.begin(),arr.end());
         vector<vector<int>> res;
-        set<vector<int>> s1;
         
-        subset(arr,res,s1,0,vector<int>());
+        subset(arr,res,0,vector<int>());
+        
         sort(res.begin(),res.end());
         return res;
     }
