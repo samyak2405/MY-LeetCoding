@@ -9,63 +9,35 @@ using namespace std;
 
 class Solution{
 public:
-
-    bool checker(vector<vector<int>> board,int i,int j,int element)
-    {
-        for(int k = 0;k<9;k++)
-        {
-            if(k!=j)
-            {
-                if(board[i][k]==element)
-                    return false;
-            }
-            if(k!=i)
-            {
-                if(board[k][j]==element)
-                    return false;
-            }
-        }
-        
-        int row = 0;
-        if(i>=0 and i<=2)
-            row = 0;
-        else if(i>=3 and i<=5)
-            row = 3;
-        else
-            row = 6;
-        
-        int col = 0;
-        if(j>=0 and j<=2)
-            col = 0;
-        else if(j>=3 and j<=5)
-            col = 3;
-        else
-            col = 6;
-        for(int k = row;k<row+3;k++)
-        {
-            for(int l = col;l<col+3;l++)
-            {
-                if(k==i and l==j)
-                    continue;
-                else if(board[k][l]==element)
-                    return false;
-            }
-        }
-        return true;
-    }
-
     int isValid(vector<vector<int>> mat){
+        int r[9][9];
+        int c[9][9];
+        int s[3][3][9];
+        memset(r,0,sizeof(r));
+        memset(c,0,sizeof(c));
+        memset(s,0,sizeof(s));
+        
         for(int i = 0;i<9;i++)
         {
             for(int j = 0;j<9;j++)
             {
-                if(mat[i][j]==0)
-                    continue;
-                else if(!checker(mat,i,j,mat[i][j]))
-                    return false;
+                if(mat[i][j]>0 and mat[i][j]<=9)
+                {
+                    int number;
+                    number = mat[i][j]-1;
+                    if(r[i][number])
+                        return 0;
+                    r[i][number] = 1;
+                    if(c[j][number])
+                        return 0;
+                    c[j][number] = 1;
+                    if(s[i/3][j/3][number])
+                        return 0;
+                    s[i/3][j/3][number] = 1;
+                }
             }
         }
-        return true;
+        return 1;
     }
 };
 
