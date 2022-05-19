@@ -13,6 +13,7 @@ public:
         int v3 = dfs(r,c-1,m,n,matrix[r][c],matrix,dp);
         int v4 = dfs(r,c+1,m,n,matrix[r][c],matrix,dp);
         return dp[r][c] = 1+max(v1,max(v2,max(v3,v4)));
+        // return 1+max(v1,max(v2,max(v3,v4)));
     }
     
     int longestIncreasingPath(vector<vector<int>>& matrix) {
@@ -24,7 +25,7 @@ public:
         {
             for(int j = 0;j<n;j++)
             {
-                dfs(i,j,m,n,-1,matrix,dp);
+                ans =max(ans,dfs(i,j,m,n,-1,matrix,dp));
                 ans = max(ans,dp[i][j]);
             }       
         }
