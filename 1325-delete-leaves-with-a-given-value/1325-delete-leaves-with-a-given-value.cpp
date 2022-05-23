@@ -16,19 +16,19 @@ public:
     {
         if(!root)
             return NULL;
-        if(!root->left and !root->right)
-        {
-            if(root->val==target)
-                return NULL;
-            return root;
-        }
+        // if(!root->left and !root->right)
+        // {
+        //     if(root->val==target)
+        //         return NULL;
+        //     return root;
+        // }
         root->left = solve(root->left,target);
-        if(!root->left and !root->right)
-        {
-            if(root->val==target)
-                return NULL;
-            return root;
-        }
+        // if(!root->left and !root->right)
+        // {
+        //     if(root->val==target)
+        //         return NULL;
+        //     return root;
+        // }
         root->right = solve(root->right,target);
         if(!root->left and !root->right)
         {
