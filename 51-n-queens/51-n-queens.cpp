@@ -57,9 +57,6 @@ public:
         for(int i = 0;i<n;i++)
             board[i] = s;
         solve(0,board,res,n);
-        
-        
-        
         return res;
     }
 };
