@@ -11,7 +11,7 @@ public:
                 int u = it[0];
                 int v = it[1];
                 int w = it[2];
-                if(dist[v]>dist[u]+w)
+                if(dist[u]!=1e8 and dist[v]>dist[u]+w)
                     dist[v] = dist[u]+w;
             }
         }
