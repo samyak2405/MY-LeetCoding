@@ -22,8 +22,8 @@ class Solution{
                 int u = it[0];
                 int v = it[1];
                 int w = it[2];
-                if(dist[v]>dist[u]+it[2])
-                    dist[v] = dist[u] + it[2];
+                if(dist[v]>dist[u]+w)
+                    dist[v] = dist[u] + w;
             }
         }
         return dist;
