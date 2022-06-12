@@ -6,10 +6,10 @@ public:
             target+=it;
         if(target==0)
             return nums.size();
+        int res = INT_MIN;
         unordered_map<int,int> mp;
         mp[0] = -1;
         int sum = 0;
-        int res = INT_MIN;
         for(int i = 0;i<nums.size();i++)
         {
             sum+=nums[i];
