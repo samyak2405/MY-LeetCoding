@@ -40,7 +40,8 @@ int find(int A[],int X)
 {
        if(A[X]==X)
             return X;
-        return find(A,A[X]);
+        A[X] = find(A,A[X]);
+        return A[X];
 }
 void unionSet(int A[],int X,int Z)
 {
@@ -48,5 +49,6 @@ void unionSet(int A[],int X,int Z)
 	int y_rep = find(A,Z);
 	if(x_rep==y_rep)
 	    return;
+	
 	A[x_rep] = y_rep;
 }
