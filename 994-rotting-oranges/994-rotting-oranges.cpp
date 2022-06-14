@@ -10,9 +10,9 @@ public:
     {
         int m = grid.size();
         int n = grid[0].size();
-        bool flag = false;
         queue<pair<int,int>> q;
         vector<vector<int>> lvl(m,vector<int>(n,0));
+        int fresh = 0;
         for(int i = 0;i<m;i++)
         {
             for(int j = 0;j<n;j++)
@@ -23,10 +23,10 @@ public:
                     lvl[i][j] = 0;
                 }
                 if(grid[i][j]==1)
-                    flag = true;
+                    fresh++;
             }
         }
-        if(!flag)
+        if(!fresh)
             return 0;
         if(q.empty())
             return -1;
@@ -39,22 +39,19 @@ public:
             q.pop();
             for(auto it:movements)
             {
-                int c_x = it[0] + i;
-                int c_y = it[1] + j;
-                if(!isValid(c_x,c_y,m,n))
+                int c_i = it[0] + i;
+                int c_j = it[1] + j;
+                if(!isValid(c_i,c_j,m,n) or grid[c_i][c_j]==0 or grid[c_i][c_j]==2)
                     continue;
-                if(grid[c_x][c_y]==0 or grid[c_x][c_y]==2)
-                    continue;
-                q.push({c_x,c_y});
-                grid[c_x][c_y] = 2;
-                lvl[c_x][c_y] = lvl[i][j] + 1;
-                ans = max(ans,lvl[c_x][c_y]);
+                q.push({c_i,c_j});
+                grid[c_i][c_j] = 2;
+                fresh--;
+                lvl[c_i][c_j] = lvl[i][j] + 1;
+                ans = max(ans,lvl[c_i][c_j]);
             }
         }
-        for(int i = 0;i<m;i++)
-            for(int j = 0;j<n;j++)
-                if(grid[i][j]==1)
-                    return -1;
+        if(fresh!=0)
+            return -1;
         return ans;
     }
 };
