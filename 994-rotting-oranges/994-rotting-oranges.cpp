@@ -11,17 +11,14 @@ public:
         int m = grid.size();
         int n = grid[0].size();
         queue<pair<int,int>> q;
-        vector<vector<int>> lvl(m,vector<int>(n,0));
+        vector<vector<int>> lvl(m,vector<int>(n));
         int fresh = 0;
         for(int i = 0;i<m;i++)
         {
             for(int j = 0;j<n;j++)
             {
                 if(grid[i][j]==2)
-                {
                     q.push({i,j});
-                    lvl[i][j] = 0;
-                }
                 if(grid[i][j]==1)
                     fresh++;
             }
