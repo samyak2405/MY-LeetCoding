@@ -10,11 +10,11 @@ using namespace std;
 class Solution {
   public:
   
-    void dfs(int node,int parent,vector<int> adj[],vector<bool> &vis,vector<int> &res,vector<int> &low,vector<int> &disc,int &timer)
+    void dfs(int node,int parent,vector<int> adj[],vector<int> &disc,vector<int> &low,vector<bool> &isAP,vector<bool> &vis,int &timer)
     {
-        int child = 0;
-        vis[node] = true;
         low[node] = disc[node] = timer++;
+        vis[node] = true;
+        int child = 0;
         
         for(auto it:adj[node])
         {
@@ -22,29 +22,28 @@ class Solution {
                 continue;
             if(!vis[it])
             {
-                dfs(it,node,adj,vis,res,low,disc,timer);
+                child++;
+                dfs(it,node,adj,disc,low,isAP,vis,timer);
                 low[node] = min(low[node],low[it]);
                 if(low[it]>=disc[node] and parent!=-1)
-                    res[node] = 1;
-                child++;
+                    isAP[node] = 1;
             }
             else
-            {
                 low[node] = min(low[node],disc[it]);
-            }
         }
+        
         if(parent==-1 and child>1)
-            res[node] = 1;
+            isAP[node] = 1;
     }
   
     vector<int> articulationPoints(int V, vector<int>adj[]) {
         vector<int> res;
-        vector<bool> vis(V,false);
-        vector<int> low(V,0), disc(V,0),isArticulation(V,0);
+        vector<int> disc(V,0),low(V,0);
+        vector<bool> isAP(V,false),vis(V,false);
         int timer = 0;
-        dfs(0,-1,adj,vis,isArticulation,low,disc,timer);
+        dfs(0,-1,adj,disc,low,isAP,vis,timer);
         for(int i = 0;i<V;i++)
-            if(isArticulation[i]==1)
+            if(isAP[i])
                 res.push_back(i);
         if(res.size()==0)
             return {-1};
