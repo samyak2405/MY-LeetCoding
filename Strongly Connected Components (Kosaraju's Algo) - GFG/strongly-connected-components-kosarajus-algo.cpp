@@ -21,13 +21,22 @@ class Solution
 	    s1.push(start);
 	}
 	
-	void dfs(vector<vector<int>> &mp,int start,vector<bool> &vis)
+	void dfs(map<int,vector<int>> &mp,int start,vector<bool> &vis)
 	{
 	    vis[start] = true;
 	    for(auto it:mp[start])
 	    {
 	        if(!vis[it])
 	            dfs(mp,it,vis);
+	    }
+	}
+	
+	void mapInit(map<int,vector<int>> &mp,int V,vector<int> adj[])
+	{
+	    for(int i = 0;i<V;i++)
+	    {
+	        for(auto it:adj[i])
+	            mp[it].push_back(i);
 	    }
 	}
 	
@@ -39,13 +48,10 @@ class Solution
             if(!vis[i])
                 topologicalSort(adj,i,vis,s1);
         }
-        vector<vector<int>> mp(V);
-        for(int i = 0;i<V;i++){
-            vis[i] = false;
-            for(auto it:adj[i])
-                mp[it].push_back(i);
-        }
-        
+        map<int,vector<int>> mp;
+        mapInit(mp,V,adj);
+        for(auto it:vis)
+            it = false;
         int cnt = 0;
         while(!s1.empty())
         {
