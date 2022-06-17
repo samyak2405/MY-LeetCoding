@@ -1,45 +1,47 @@
 class Solution {
+    vector<vector<int>> res;
+    vector<int> disc;
+    vector<int> low;
+    vector<bool> vis;
+    map<int,vector<int>> mp;
+    int timer;
 public:
     
-    void dfs(int node,int parent,vector<bool> &vis,vector<int> &tin,vector<int> &low,int &timer,map<int,vector<int>> &mp,vector<vector<int>> &res)
+    void dfs(vector<vector<int>> &conn,int node,int parent)
     {
-        vis[node] = 1;
-        tin[node] = low[node] = timer++;
+        vis[node] = true;
+        low[node] =disc[node] = timer++;
         for(auto it:mp[node])
         {
             if(it==parent)
                 continue;
             if(!vis[it])
             {
-                dfs(it,node,vis,tin,low,timer,mp,res);
+                dfs(conn,it,node);
                 low[node] = min(low[node],low[it]);
-                if(low[it]>tin[node])
-                {
-                    vector<int> tmp;
-                    tmp.push_back(it);
-                    tmp.push_back(node);
-                    res.push_back(tmp);
-                }
+                if(low[it]>disc[node])
+                    res.push_back({it,node});
             }
             else
-                low[node] = min(low[node],tin[it]);
+                low[node] = min(low[node],disc[it]);
         }
     }
     
-    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
-        vector<vector<int>> res;
-        map<int,vector<int>> mp;
-        for(int i = 0;i<connections.size();i++)
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conn) {
+        disc.resize(n,0);
+        low.resize(n,0);
+        vis.resize(n,0);
+        for(auto it:conn)
         {
-            mp[connections[i][0]].push_back(connections[i][1]);
-            mp[connections[i][1]].push_back(connections[i][0]);
+            mp[it[0]].push_back(it[1]);
+            mp[it[1]].push_back(it[0]);
         }
-        vector<bool> vis(n,0);
-        vector<int> tin(n,-1),low(n,-1);
-        int timer = 0;
+        timer = 0;
         for(int i = 0;i<n;i++)
+        {
             if(!vis[i])
-                dfs(i,-1,vis,tin,low,timer,mp,res);
+                dfs(conn,i,-1);
+        }
         return res;
     }
 };
