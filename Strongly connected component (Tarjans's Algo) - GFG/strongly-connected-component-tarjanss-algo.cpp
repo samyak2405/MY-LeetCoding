@@ -12,11 +12,11 @@ class Solution
     vector<int> low;
     stack<int> st;
     vector<bool> stkmem;
+    int  timer = 0;
 	public:
 	
     void dfs(int start,vector<int> adj[])
     {
-        static int  timer = 0;
         disc[start] = low[start] = timer++;
         st.push(start);
         stkmem[start] = 1;
