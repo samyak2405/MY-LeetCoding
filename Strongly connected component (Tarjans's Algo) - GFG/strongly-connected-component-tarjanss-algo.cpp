@@ -13,9 +13,7 @@ class Solution
     stack<int> st;
     vector<bool> stkmem;
 	public:
-    //Function to return a list of lists of integers denoting the members 
-    //of strongly connected components in the given graph.
-    
+	
     void dfs(int start,vector<int> adj[])
     {
         static int  timer = 0;
@@ -35,6 +33,7 @@ class Solution
         vector<int> tmp;
         if(low[start]==disc[start])
         {
+            int num = st.top();
             while(st.top()!=start)
             {
                 int num = st.top();
