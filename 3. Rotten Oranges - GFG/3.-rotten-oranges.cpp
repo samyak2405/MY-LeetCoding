@@ -19,6 +19,7 @@ class Solution
         queue<pair<int,int>> q;
         int fresh = 0;
         vector<vector<int>> lvl(n,vector<int>(m,0));
+        //push all sources in the queue and keep the count of fresh oranges
         for(int i = 0;i<n;i++)
         {
             for(int j = 0;j<m;j++)
@@ -29,13 +30,14 @@ class Solution
                     fresh++;
             }
         }
-        // cout<<fresh<<" "<<q.size()<<" ";
+        //if oranges are not fresh
         if(!fresh)
             return 0;
+        //if no rotten oranges are present
         if(q.empty())
             return -1;
         int ans = INT_MIN;
-        
+        //do a multisource bfs traversal
         int movements[5] = {0,-1,0,1,0};
         while(!q.empty())
         {
@@ -45,7 +47,6 @@ class Solution
             
             for(int k = 0;k<4;k++)
             {
-                // cout<<"Entered";
                 int c_i = i+movements[k];
                 int c_j = j+movements[k+1];
                 if(!isValid(c_i,c_j,n,m) or grid[c_i][c_j]==2 or grid[c_i][c_j]==0)
@@ -57,7 +58,6 @@ class Solution
                 ans = max(ans,lvl[c_i][c_j]);
             }
         }
-        // cout<<fresh<<" ";
         if(fresh)
             return -1;
         return ans;
