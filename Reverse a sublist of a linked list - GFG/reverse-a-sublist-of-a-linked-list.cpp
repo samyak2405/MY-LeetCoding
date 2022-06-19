@@ -67,23 +67,6 @@ class Solution
             p = p->next;
         p->next = q;
         return dummy->next;
-        // vector<int> v1;
-        // Node *p = head;
-        // while(p)
-        // {
-        //     v1.push_back(p->data);
-        //     p=p->next;
-        // }
-        // reverse(v1.begin()+m-1,v1.begin()+n);
-        // Node *dummy = new Node(0);
-        // p = dummy;
-        // for(int i = 0;i<v1.size();i++)
-        // {
-        //     Node *newnode = new Node(v1[i]);
-        //     p->next = newnode;
-        //     p = p->next;
-        // }
-        // return dummy->next;
         
     }
 };
