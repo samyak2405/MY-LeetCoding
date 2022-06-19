@@ -31,25 +31,60 @@ struct Node {
 class Solution
 {
     public:
+    
+    Node *reverseLL(Node *head)
+    {
+        Node *curr = head,*prev = NULL,*forward = NULL;
+        while(curr)
+        {
+            forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+        }
+        return prev;
+    }
+    
     Node* reverseBetween(Node* head, int m, int n)
     {
-        vector<int> v1;
-        Node *p = head;
-        while(p)
-        {
-            v1.push_back(p->data);
-            p=p->next;
-        }
-        reverse(v1.begin()+m-1,v1.begin()+n);
         Node *dummy = new Node(0);
-        p = dummy;
-        for(int i = 0;i<v1.size();i++)
-        {
-            Node *newnode = new Node(v1[i]);
-            p->next = newnode;
+        dummy->next = head;
+        Node *p = dummy,*q = dummy;
+        m--;
+        n++;
+        while(p and m--)
             p = p->next;
-        }
+        while(q and n--)
+            q = q->next;
+        Node *r = p->next;
+        Node *s = r;
+        while(s->next!=q)
+            s=s->next;
+        s->next = NULL;
+        r = reverseLL(r);
+        p->next = r;
+        while(p->next)
+            p = p->next;
+        p->next = q;
         return dummy->next;
+        // vector<int> v1;
+        // Node *p = head;
+        // while(p)
+        // {
+        //     v1.push_back(p->data);
+        //     p=p->next;
+        // }
+        // reverse(v1.begin()+m-1,v1.begin()+n);
+        // Node *dummy = new Node(0);
+        // p = dummy;
+        // for(int i = 0;i<v1.size();i++)
+        // {
+        //     Node *newnode = new Node(v1[i]);
+        //     p->next = newnode;
+        //     p = p->next;
+        // }
+        // return dummy->next;
+        
     }
 };
 
