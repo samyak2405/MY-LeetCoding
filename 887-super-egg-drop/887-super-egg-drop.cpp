@@ -1,35 +1,36 @@
 class Solution {
 public:
     
-    int f(int k,int n,vector<vector<int>> &dp)
+    int solve(int f,int e,vector<vector<int>> &dp)
     {
-        if(n==0 or n==1)
-            return n;
-        if(k==1)
-            return n;
-        if(dp[k][n]!=-1)
-            return dp[k][n];
+        if(e==0)
+            return 0;
+        if(e==1)
+            return f;
+        if(f==1 or f==0)
+            return f;
+        if(dp[f][e]!=-1)
+            return dp[f][e];
         int mn = INT_MAX;
         int low = 1;
-        int high = n;
+        int high = f;
         while(low<=high)
         {
             int mid = low+(high-low)/2;
-            int broken = f(k-1,mid-1,dp);
-            int not_broken = f(k,n-mid,dp);
-            int tmp = 1+max(broken,not_broken);
-            mn = min(mn,tmp);
-            if(broken<not_broken)
+            int breaked = solve(mid-1,e-1,dp);
+            int not_breaked = solve(f-mid,e,dp);
+            int tmp = max(breaked,not_breaked)+1;
+            if(breaked<not_breaked)
                 low = mid+1;
             else
                 high = mid-1;
-            
+            mn = min(mn,tmp);
         }
-        return dp[k][n] =mn;
+        return dp[f][e] = mn;
     }
     
     int superEggDrop(int k, int n) {
-        vector<vector<int>> dp(k+1,vector<int>(n+1,-1));
-        return f(k,n,dp);
+        vector<vector<int>> dp(n+1,vector<int>(k+1,-1));
+        return solve(n,k,dp);
     }
 };
