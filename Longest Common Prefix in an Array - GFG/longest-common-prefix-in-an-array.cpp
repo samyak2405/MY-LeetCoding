@@ -20,15 +20,22 @@ class Solution{
         
         for(int i = 0;i<N;i++)
         {
-            int j = 0;
-            int k = 0;
+            
             int cnt = 0;
-            while(res[j]==arr[i][k])
+            if(res==arr[i])
+                cnt = res.size();
+            else
             {
-                cnt++;
-                j++;
-                k++;
-            }
+                int j = 0;
+                int k = 0;
+                while(res[j]==arr[i][k])
+                {
+                    cnt++;
+                    j++;
+                    k++;
+                }
+                }
+            
             if(cnt==0)
                 return "-1";
             ans = min(ans,cnt);
