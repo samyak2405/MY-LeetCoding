@@ -6,24 +6,27 @@ using namespace std;
 class Solution {
 public:
 
-    void dfs(map<int,vector<int>> &mp,int s,int d,int &cnt)
+    int dfs(map<int,vector<int>> &mp,vector<bool> &vis,int s,int d)
     {
         if(s == d)
-            cnt++;
+            return 1;
+        vis[s] = true;
+        int ans = 0;
         for(auto it:mp[s])
         {
-            dfs(mp,it,d,cnt);
+            if(!vis[it])
+                ans+= dfs(mp,vis,it,d);
         }
-        return;
+        vis[s] = false;
+        return ans;
     }
 
 	int possible_paths(vector<vector<int>>edges, int n, int s, int d){
-	    int cnt = 0;
 	    map<int,vector<int>> mp;
 	    for(int i = 0;i<edges.size();i++)
 	        mp[edges[i][0]].push_back(edges[i][1]);
-	    dfs(mp,s,d,cnt);
-	    return cnt;
+	    vector<bool> vis(n,false);
+	    return dfs(mp,vis,s,d);
 	}
 };
 
