@@ -5,9 +5,40 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
+	
+// 	int f(int ind,int prev,int flag,vector<int> &nums,vector<vector<vector<int>>> &dp)
+// 	{
+// 	    if(ind==nums.size())
+// 	        return 0;
+// 	    if(dp[ind][prev+1][flag]!=-1)
+// 	        return dp[ind][prev+1][flag];
+// 	    int nt = f(ind+1,prev,flag,nums,dp);
+// 	    int t = 0;
+// 	    if(prev==-1)
+// 	        t = 1+f(ind+1,ind,flag,nums,dp);
+// 	    else
+// 	    {
+// 	        if(flag)
+// 	        {
+// 	            if(nums[ind]>nums[prev])
+// 	                t = 1+f(ind+1,ind,flag,nums,dp);
+// 	            else if(nums[ind]<nums[prev])
+// 	                t = 1+f(ind+1,ind,1-flag,nums,dp);
+// 	        }
+// 	        else
+// 	        {
+// 	            if(nums[ind]<nums[prev])
+// 	                t = 1+f(ind+1,ind,flag,nums,dp);
+// 	        }
+// 	    }
+// 	    return dp[ind][prev+1][flag] = max(t,nt);
+// 	}
+	
 	int LongestBitonicSequence(vector<int>nums)
 	{
 	    int n = nums.size();
+	   // vector<vector<vector<int>>> dp(n,vector<vector<int>>(n,vector<int>(2,-1)));
+	   // return f(0,-1,1,nums,dp);
 	    vector<int> lis(n,1),lds(n,1);
 	    for(int i = 1;i<n;i++)
 	    {
