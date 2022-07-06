@@ -13,7 +13,6 @@ class Solution{
         int ans = A[0] + A[1] + A[2];
         for(int i = 0;i<N;i++)
         {
-            int mini = INT_MAX;
             int j = i+1,k=N-1;
             while(j<k)
             {
