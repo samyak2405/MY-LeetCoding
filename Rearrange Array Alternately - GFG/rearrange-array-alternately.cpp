@@ -20,15 +20,9 @@ class Solution{
     	for(int i = 0;i<n;i++)
     	{
     	    if(!(i%2))
-    	    {
     	        arr[i]+=(arr[max_ind--]%max_element)*max_element;
- 
-    	        
     	    else
-    	    {
     	        arr[i]+=(arr[min_ind++]%max_element)*max_element;
-    	       // min_ind++;
-    	    }
     	        
     	}
     	for(int i = 0;i<n;i++)
