@@ -15,16 +15,24 @@ class Solution{
     //Function to rearrange  the array elements alternately.
     void rearrange(long long *arr, int n) 
     { 
-    	
-    	vector<int> res(arr,arr+n);
-    	 int i = 0,j = n-1,k = 0;
-    	 while(i<=j)
-    	 {
-    	     arr[k++] = res[j];
-    	     j--;
-    	     arr[k++] = res[i];
-    	     i++;
-    	 }
+    	long long max_element = arr[n-1]+1;
+    	int max_ind = n-1,min_ind = 0;
+    	for(int i = 0;i<n;i++)
+    	{
+    	    if(!(i%2))
+    	    {
+    	        arr[i]+=(arr[max_ind--]%max_element)*max_element;
+ 
+    	        
+    	    else
+    	    {
+    	        arr[i]+=(arr[min_ind++]%max_element)*max_element;
+    	       // min_ind++;
+    	    }
+    	        
+    	}
+    	for(int i = 0;i<n;i++)
+    	    arr[i]/=max_element;
     }
 };
 
