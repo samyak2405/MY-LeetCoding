@@ -10,21 +10,16 @@ class Solution
     public:
     void sort012(int a[], int n)
     {
-        int cnt_0 = 0,cnt_1 = 0;
-        for(int i = 0;i<n;i++)
+        int low = 0,high = n-1,mid = 0;
+        while(mid<=high)
         {
-            if(a[i]==0)
-                cnt_0++;
-            else if(a[i]==1)
-                cnt_1++;
+            if(a[mid]==0)
+                swap(a[mid++],a[low++]);
+            else if(a[mid]==1)
+                mid++;
+            else
+                swap(a[mid],a[high--]);
         }
-        int i = 0;
-        while(cnt_0--)
-            a[i++] = 0;
-        while(cnt_1--)
-            a[i++] = 1;
-        while(i<n)
-            a[i++] = 2;
     }
     
 };
