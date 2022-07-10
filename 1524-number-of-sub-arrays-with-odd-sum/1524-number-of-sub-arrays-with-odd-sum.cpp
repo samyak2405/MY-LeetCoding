@@ -38,9 +38,7 @@ public:
             if(arr[i]%2==0)
             {
                 even = (1+even_next)%mod;
-                odd = odd_next;
                 even_next = even;
-                odd_next = odd;
             }
             else
             {
