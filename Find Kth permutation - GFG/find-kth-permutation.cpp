@@ -25,12 +25,14 @@ public:
         k--;
         while(1)
         {
+            
             ans+=to_string(nos[k/fact]);
             nos.erase(nos.begin()+k/fact);
             if(nos.size()==0)
                 return ans;
             k = k%fact;
             fact = fact/nos.size();
+            // cout<<k<<" "<<fact<<endl;
         }
         return ans;
     }
