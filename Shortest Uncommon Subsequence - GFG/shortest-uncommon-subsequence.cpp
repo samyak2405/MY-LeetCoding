@@ -31,28 +31,47 @@ class Solution {
         int m = T.length();
         // vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
         // return f(0,0,n,m,S,T,dp);
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
-        for(int i=0;i<=n;i++)
-            dp[i][0]=1;
-        for(int i=0;i<=m;i++)
-            dp[0][i]=1e9;
+        // vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        // for(int i=0;i<=n;i++)
+        //     dp[i][0]=1;
+        // for(int i=0;i<=m;i++)
+        //     dp[0][i]=1e9;
+        // for(int i = 0;i<n;i++)
+        // {
+        //     for(int j = 0;j<m;j++)
+        //     {
+        //         int k = j;
+        //         for(k;k>=0;k--)
+        //             if(S[i]==T[k])
+        //                 break;
+        //         if(k<0)
+        //             dp[i+1][j+1] =1;
+        //         else
+        //             dp[i+1][j+1] = min(dp[i][j+1],1+dp[i][k]);
+        //     }
+        // }
+        // if(dp[n][m]>=1e9)
+        //     return -1;
+        // return dp[n][m];
+        vector<int> prev(m+1,1e9),curr(m+1,1e9);
         for(int i = 0;i<n;i++)
         {
             for(int j = 0;j<m;j++)
             {
                 int k = j;
-                for(k;k>=0;k--)
+                for(;k>=0;k--)
                     if(S[i]==T[k])
                         break;
                 if(k<0)
-                    dp[i+1][j+1] =1;
+                    prev[j+1] = 1;
                 else
-                    dp[i+1][j+1] = min(dp[i][j+1],1+dp[i][k]);
+                    prev[j+1] = min(curr[j+1],1+curr[k]);
             }
+            curr = prev;
         }
-        if(dp[n][m]>=1e9)
+        if(prev[m]>=1e9)
             return -1;
-        return dp[n][m];
+        return prev[m];
     }
 };
 
