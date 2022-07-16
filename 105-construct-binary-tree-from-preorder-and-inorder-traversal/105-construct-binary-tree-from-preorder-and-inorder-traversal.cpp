@@ -18,19 +18,20 @@ public:
     {
         if(preStart>preEnd or inStart>inEnd)
             return NULL;
-        TreeNode *node = new TreeNode(preorder[preStart]);
-        int inRoot = mp[node->val];
-        int numsOnLeft = inRoot - inStart;
+        TreeNode *root = new TreeNode(preorder[preStart]);
         
-        node->left = build(preorder,preStart+1,preStart+numsOnLeft,inorder,inStart,inRoot-1,mp);
-        node->right = build(preorder,preStart+numsOnLeft+1,preEnd,inorder,inRoot+1,inEnd,mp);
+        int inRoot = mp[root->val];
+        int numsOnLeft = inRoot-inStart;
         
-        return node;
+        root->left = build(preorder,preStart+1,preStart+numsOnLeft,inorder,inStart,inRoot-1,mp);
+        root->right = build(preorder,preStart+numsOnLeft+1,preEnd,inorder,inRoot+1,inEnd,mp);
+        
+        return root;
     }
     
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         map mp;
-        int n = inorder.size();
+        int n = preorder.size();
         for(int i = 0;i<n;i++)
             mp[inorder[i]] = i;
         TreeNode *root = build(preorder,0,n-1,inorder,0,n-1,mp);
