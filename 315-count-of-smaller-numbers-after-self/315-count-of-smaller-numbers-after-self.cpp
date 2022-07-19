@@ -11,9 +11,9 @@ public:
         sort_count(mid,r,count);
         for(iterator i=l,j =mid;i<mid;i++)
         {
-            while(j<r and (*i).first>(*j).first)
+            while(j<r and i->first>j->first)
                 j++;
-            count[(*i).second] += j- mid;
+            count[i->second] += j- mid;
         }
         inplace_merge(l,mid,r);
     }
