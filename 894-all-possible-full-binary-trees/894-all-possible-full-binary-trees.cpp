@@ -10,14 +10,13 @@
  * };
  */
 class Solution {
-    unordered_map<int,vector<TreeNode *>> mp;
 public:
     vector<TreeNode*> allPossibleFBT(int n) {
         vector<TreeNode *> res;
         if(n==1)
+        {
             res.push_back(new TreeNode(0));
-        if(mp[n].size())
-            return mp[n];
+        }
         else
         {
             for(int i = 1;i<n;i+=2)
@@ -37,7 +36,7 @@ public:
                 }
             }
         }
-        mp[n] = res;
+        
         return res;
     }
 };
