@@ -7,22 +7,18 @@ public:
         map<int,int> mp;
         for(auto it:arr)
             mp[it]++;
-        priority_queue<pi,vector<pi>,greater<pi>> pq;
+        priority_queue<int,vector<int>,greater<int>> pq;
         for(auto it:mp)
-        {
-            pq.push({it.second,it.first});
-        }
+            pq.push(it.second);
         while(!pq.empty() and k>0)
         {
-            int freq = pq.top().first;
-            while(freq>0 and k>0)
-            {
-                freq--;
-                k--;
-            }
-            if(freq==0)
-                pq.pop();
+            int freq = pq.top();
+            k-=freq;
+            pq.pop();
         }
+        cout<<k<<" ";
+        if(k<0)
+            return pq.size()+1;
         return pq.size();
     }
 };
