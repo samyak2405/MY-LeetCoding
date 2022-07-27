@@ -16,7 +16,6 @@ public:
             k-=freq;
             pq.pop();
         }
-        cout<<k<<" ";
         if(k<0)
             return pq.size()+1;
         return pq.size();
