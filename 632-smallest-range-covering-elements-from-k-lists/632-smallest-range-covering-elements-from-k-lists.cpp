@@ -1,9 +1,11 @@
 class Solution {
 public:
+    #define pii pair<int,int>
+    #define pip pair<int,pii>
     vector<int> smallestRange(vector<vector<int>>& nums) {
         vector<int> res;
         int n = nums.size();
-        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
+        priority_queue<pip,vector<pip>,greater<pip>> pq;
         int start = 0,end = 0,mini = INT_MAX,maxi = INT_MIN;
         for(int i = 0;i<n;i++)
         {
@@ -17,10 +19,12 @@ public:
         {
             auto it = pq.top();
             pq.pop();
-            if(it.second.second==nums[it.second.first].size())
+            int x = it.second.first;
+            int y = it.second.second;
+            if(y==nums[x].size())
                 break;
-            maxi = max(maxi,nums[it.second.first][it.second.second]);
-            pq.push({nums[it.second.first][it.second.second],{it.second.first,it.second.second+1}});
+            maxi = max(maxi,nums[x][y]);
+            pq.push({nums[x][y],{x,y+1}});
             mini = pq.top().first;
             if(maxi-mini<end-start)
             {
