@@ -10,14 +10,14 @@
  * };
  */
 class Solution {
-    int res = 0;
 public:
     
-    int f(TreeNode *root)
+    int f(TreeNode *root,int &res)
     {
         if(!root)
             return 2;
-        int l = f(root->left),r = f(root->right);
+        int l = f(root->left,res);
+        int r = f(root->right,res);
         if(l==0 or r==0)
         {
             res++;
@@ -27,7 +27,8 @@ public:
     }
     
     int minCameraCover(TreeNode* root) {
-        return (f(root)==0?1:0) + res;
-        return res;
+        int res = 0;
+        int val = f(root,res);
+        return ((val==0)?1:0) + res;
     }
 };
