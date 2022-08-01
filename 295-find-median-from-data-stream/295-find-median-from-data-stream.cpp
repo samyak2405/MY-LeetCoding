@@ -4,6 +4,12 @@ class MedianFinder {
     priority_queue<int,vector<int>,greater<int>> minheap;
     
 public:
+    MedianFinder()
+    {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+   
+    }
     
     void balance()
     {
