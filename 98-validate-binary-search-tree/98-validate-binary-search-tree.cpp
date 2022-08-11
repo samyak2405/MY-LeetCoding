@@ -12,13 +12,9 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        if(!root)
-            return true;
-        
         stack<TreeNode *> s1;
         TreeNode *prev = NULL;
-        
-        while(root or !s1.empty())
+        while(!s1.empty() or root)
         {
             while(root)
             {
@@ -27,12 +23,11 @@ public:
             }
             root = s1.top();
             s1.pop();
-            if(prev and root->val<=prev->val)
+            if(prev and prev->val>=root->val)
                 return false;
             prev = root;
             root = root->right;
         }
-        
         return true;
     }
 };
