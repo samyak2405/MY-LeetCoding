@@ -6,7 +6,7 @@ public:
         string res = "";
         while(n>0)
         {
-            res+=to_string(n%10);
+            res+= to_string(n%10);
             n/=10;
         }
         sort(res.begin(),res.end());
@@ -15,7 +15,7 @@ public:
             {
                 int x = stoi(res);
                 if(ceil(log2(x))==floor(log2(x)))
-                   return true;
+                    return true;
             }
         }while(next_permutation(res.begin(),res.end()));
         return false;
