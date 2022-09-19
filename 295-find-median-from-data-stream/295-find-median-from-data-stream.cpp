@@ -4,12 +4,7 @@ class MedianFinder {
     priority_queue<int,vector<int>,greater<int>> minheap;
     
 public:
-    MedianFinder()
-    {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-   
-    }
+    
     
     void balance()
     {
@@ -37,7 +32,7 @@ public:
             maxheap.push(num);
         else
         {
-            if(maxheap.top()<num)
+            if(num>maxheap.top())
                 minheap.push(num);
             else
                 maxheap.push(num);
@@ -53,9 +48,9 @@ public:
         else
         {
             if(n>m)
-                return maxheap.top();
+                return (double)maxheap.top();
             else
-                return minheap.top();
+                return (double)minheap.top();
         }
     }
 };
