@@ -1,25 +1,27 @@
-#pragma GCC optimize("O2")
 class Solution {
 public:
     vector<int> sumEvenAfterQueries(vector<int>& nums, vector<vector<int>>& queries) {
-        ios::sync_with_stdio(false);
-        cin.tie(0);
-        cout.tie(0);
-                
-        int sum = accumulate(nums.begin(), nums.end(), 0, [](int &x, int &y){
-            return (y & 1) ? x : x + y;
-        });
-        int tmp, t0, t1, k, n = queries.size(), i = 0;
-        vector<int> ans(n);
-        
-        for(vector<int> &v : queries){
-            t0 = v[0];
-            t1 = v[1];
-            k = nums[t1];
-            tmp = k + t0;
-            ans[i++] = sum += (k & 1) ? ((tmp & 1) ? 0 : tmp) : ((tmp & 1) ? -k : t0);
-            nums[t1] = tmp;
+        vector<int> res;
+        int n = queries.size();
+        int sum = 0;
+        for(int i:nums)
+            if(i%2==0)
+                sum+=i;
+        for(int i = 0;i<n;i++)
+        {
+            int val = queries[i][0];
+            int index = queries[i][1];
+            int tmp = nums[index];
+            nums[index] = nums[index]+val;
+            if(tmp%2==0 and nums[index]%2==0)
+                sum+=val;
+            else if(tmp%2==0 and nums[index]%2)
+                sum-=tmp;
+            else if(tmp%2 and nums[index]%2==0)
+                sum+=nums[index];
+            res.push_back(sum);
+            
         }
-        return ans;
+        return res;
     }
 };
