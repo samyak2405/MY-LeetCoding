@@ -1,26 +1,24 @@
 class TimeMap {
-    map<string,set<pair<int,string>,greater<pair<int,string>>>> mp;
+    map<string,vector<pair<int,string>>> mp;
 public:
     TimeMap() {
         
     }
     
     void set(string key, string value, int timestamp) {
-        mp[key].insert({timestamp,value});
+        mp[key].push_back({timestamp,value});
     }
     
     string get(string key, int timestamp) {
-        for(auto it:mp[key])
-            if(it.first<=timestamp)
-                return it.second;
-        
-        return "";
+        auto &nums = mp[key];
+        int low = -1,high = nums.size();
+        while(high-low>1)
+        {
+            int mid = (high+low)/2;
+            if(nums[mid].first<=timestamp) low = mid;
+            else
+                high = mid;
+        }
+        return low==-1?"":mp[key][low].second;
     }
 };
-
-/**
- * Your TimeMap object will be instantiated and called as such:
- * TimeMap* obj = new TimeMap();
- * obj->set(key,value,timestamp);
- * string param_2 = obj->get(key,timestamp);
- */
